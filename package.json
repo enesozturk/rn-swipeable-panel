@@ -1,0 +1,24 @@
+{
+	"name": "rn-swipeable-panel",
+	"version": "1.0.0",
+	"description": "Swipeable panel for react native",
+	"main": "index.js",
+	"keywords": [
+		"react",
+		"react native",
+		"react-native-component",
+		"mobile",
+		"ios",
+		"android",
+		"swipeable",
+		"panel",
+		"swipeable-panel",
+		"swipe-up",
+		"swipe-down"
+	],
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"author": "Enes Ozturk",
+	"license": "ISC"
+}
