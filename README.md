@@ -1,0 +1,90 @@
+
+<div align="center">
+ <img src="screenshots/ios.gif" width="200" height="400">
+</div>
+
+<br/>
+
+
+<br/>
+<div align="center"><h3>React Native Swipeable Panel<h3></div>
+<div align="center">React Native Panel animates up and controllable with pan gestures</div>
+
+<br/>
+
+<div align="center">
+
+[![npm version](https://img.shields.io/npm/v/rn-swipeable-panel.svg)](https://www.npmjs.com/package/rn-swipeable-panel)
+</div>
+<br/>
+
+React Native Swipeable Panel that animate from bottom and controllable with pan gestures. You can extend panel by swiping up, make it small or close by swiping down with pan gestures. Feel free to redesign inside of panel.
+
+
+## Getting started
+```
+$ npm install rn-swipeable-panel --save
+```
+
+or
+
+```
+$ yarn add rn-swipeable-panel
+```
+
+<!-- ## Usage -->
+
+
+
+## Example
+
+```javascript
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+
+import SwipeablePanel from 'rn-swipeable-panel';
+
+
+export default class App extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            swipeablePanelActive: false
+        };
+    }
+
+    componentDidMount = () => {
+        this.openPanel();
+    };
+
+    openPanel = () => {
+        this.setState({ swipeablePanelActive: true });
+    };
+
+    closePanel = () => {
+        this.setState({ swipeablePanelActive: false });
+        setTimeout(() => {
+        	this.openPanel();
+        }, 1000);
+    };
+
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.welcome}>Welcome to React Native!</Text>
+                <Text style={styles.instructions}>To get started, edit App.js</Text>
+                <SwipeablePanel active={this.state.swipeablePanelActive} onClose={() => this.closePanel()} />
+            </View>
+        );
+    }
+}
+
+```
+
+#### Releases
+
+- 1.0.0 - Initial release
+
+#### TODOs
+
+- [ ] Full width option
