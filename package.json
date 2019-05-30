@@ -20,5 +20,8 @@
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
 	"author": "Enes Ozturk",
-	"license": "ISC"
+	"license": "ISC",
+	"devDependencies": {
+		"metro-react-native-babel-preset": "^0.54.1"
+	}
 }
