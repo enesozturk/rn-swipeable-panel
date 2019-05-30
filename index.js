@@ -1,11 +1,8 @@
 import React from 'react';
 import { StyleSheet, Animated, Dimensions, PanResponder, Easing } from 'react-native';
+import { Bar } from './components/bar';
 
 export const fullHeight = Dimensions.get('window').height;
-
-const Bar = ({}) => {
-	return <View style={BarStyles.bar} />;
-};
 
 class BottomUpDetails extends React.Component {
 	constructor(props) {
@@ -112,17 +109,6 @@ class BottomUpDetails extends React.Component {
 }
 
 export default BottomUpDetails;
-
-const BarStyles = StyleSheet.create({
-	bar: {
-		width: '60%',
-		height: 6,
-		borderRadius: 5,
-		marginTop: 10,
-		marginBottom: 10,
-		backgroundColor: '#e2e2e2'
-	}
-});
 
 const BottomUpDetailStyles = StyleSheet.create({
 	background: {
