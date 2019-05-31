@@ -1,19 +1,27 @@
 import React from 'react';
 import { StyleSheet, Animated, Dimensions, PanResponder, Easing } from 'react-native';
-import { Bar } from '../bar';
+import { Bar } from './Bar';
 
-const fullHeight = Dimensions.get('window').height;
-const fullWidth = Dimensions.get('window').width;
-const containerHeight = fullHeight - 100;
+import PropTypes from 'prop-types';
+
+const FULL_HEIGHT = Dimensions.get('window').height;
+const FULL_WIDTH = Dimensions.get('window').width;
+const CONTAINER_HEIGHT = FULL_HEIGHT - 100;
 
 class SwipeablePanel extends React.Component {
+	static propTypes = {
+		isActive: PropTypes.bool.isRequired,
+		onClose: PropTypes.func,
+		fullWidth: PropTypes.bool
+	};
+
 	constructor(props) {
 		super(props);
 		this.state = {
 			showComponent: false,
 			opacity: new Animated.Value(0)
 		};
-		this.pan = new Animated.ValueXY({ x: 0, y: fullHeight });
+		this.pan = new Animated.ValueXY({ x: 0, y: FULL_HEIGHT });
 		this.oldPan = { x: 0, y: 0 };
 
 		this._panResponder = PanResponder.create({
@@ -29,22 +37,9 @@ class SwipeablePanel extends React.Component {
 				const distance = this.oldPan.y - this.pan.y._value;
 				this.setState({ top: distance });
 
-				if (distance < -100) {
-					this.closeDetails();
-					if (this.props.onClose != 'undefined' && this.props.onClose) this.props.onClose();
-				} else if (distance > 0 && distance > 50) {
-					Animated.spring(this.pan, {
-						toValue: { x: 0, y: 0 },
-						easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
-						duration: 300
-					}).start();
-				} else {
-					Animated.spring(this.pan, {
-						toValue: { x: 0, y: fullHeight - 400 },
-						easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
-						duration: 300
-					}).start();
-				}
+				if (distance < -100) this._animateClosingAndOnCloseProp();
+				else if (distance > 0 && distance > 50) this._animateToLargePanel();
+				else this._animateToSmallPanel();
 			}
 		});
 	}
@@ -58,10 +53,31 @@ class SwipeablePanel extends React.Component {
 		}
 	}
 
+	_animateClosingAndOnCloseProp = () => {
+		this.closeDetails();
+		if (this.props.onClose != 'undefined' && this.props.onClose) this.props.onClose();
+	};
+
+	_animateToLargePanel = () => {
+		Animated.spring(this.pan, {
+			toValue: { x: 0, y: 0 },
+			easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
+			duration: 300
+		}).start();
+	};
+
+	_animateToSmallPanel = () => {
+		Animated.spring(this.pan, {
+			toValue: { x: 0, y: FULL_HEIGHT - 400 },
+			easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
+			duration: 300
+		}).start();
+	};
+
 	openDetails = () => {
 		this.setState({ showComponent: true });
 		Animated.timing(this.pan, {
-			toValue: { x: 0, y: fullHeight - 400 },
+			toValue: { x: 0, y: FULL_HEIGHT - 400 },
 			easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
 			duration: 600
 		}).start();
@@ -70,12 +86,12 @@ class SwipeablePanel extends React.Component {
 			easing: Easing.bezier(0.5, 0.5, 0.5, 0.5),
 			duration: 300
 		}).start();
-		this.oldPan = { x: 0, y: fullHeight - 400 };
+		this.oldPan = { x: 0, y: FULL_HEIGHT - 400 };
 	};
 
 	closeDetails = () => {
 		Animated.timing(this.pan, {
-			toValue: { x: 0, y: fullHeight },
+			toValue: { x: 0, y: FULL_HEIGHT },
 			easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
 			duration: 600
 		}).start();
@@ -95,7 +111,11 @@ class SwipeablePanel extends React.Component {
 		return showComponent ? (
 			<Animated.View style={[ SwipeablePanelStyles.background, { opacity: opacity } ]}>
 				<Animated.View
-					style={[ SwipeablePanelStyles.container, { transform: this.pan.getTranslateTransform() } ]}
+					style={[
+						SwipeablePanelStyles.container,
+						{ width: this.props.fullWidth ? FULL_WIDTH : FULL_WIDTH - 50 },
+						{ transform: this.pan.getTranslateTransform() }
+					]}
 					{...this._panResponder.panHandlers}
 				>
 					<Bar />
@@ -114,14 +134,14 @@ const SwipeablePanelStyles = StyleSheet.create({
 		position: 'absolute',
 		zIndex: 1,
 		justifyContent: 'center',
-		width: fullWidth,
-		height: fullHeight
+		width: FULL_WIDTH,
+		height: FULL_HEIGHT
 	},
 	container: {
 		position: 'absolute',
-		height: containerHeight,
-		width: fullWidth - 50,
-		transform: [ { translateY: fullHeight - 100 } ],
+		height: CONTAINER_HEIGHT,
+		width: FULL_WIDTH - 50,
+		transform: [ { translateY: FULL_HEIGHT - 100 } ],
 		display: 'flex',
 		flexDirection: 'column',
 		alignItems: 'center',
