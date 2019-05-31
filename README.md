@@ -81,10 +81,19 @@ export default class App extends Component {
 
 ```
 
+## Options
+<br/>
+
+| Properties                        | Type       | Description                                            | Default                                     |
+| --------------------------------- | ---------- | ------------------------------------------------------ | ------------------------------------------- |
+| **isActive**                      | `bool`     | Show/Hide the panel                                    | `"false"`                                   |
+| **onClosed**                      | `Function` | Fired when the panel is closed                         |                                             |
+| **fullWidth**                     | `bool`     | Set true if you want to make full with panel           | `"false"`                                   |
+
 #### Releases
 
 - 1.0.0 - Initial release
 
 #### TODOs
 
-- [ ] Full width option
+- [x] Add full width option
