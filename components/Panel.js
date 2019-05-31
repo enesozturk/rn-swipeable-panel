@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Animated, Dimensions, PanResponder, Easing } from 'react-native';
-import { Bar } from '../bar/Bar';
+import { Bar } from './Bar';
 
 import PropTypes from 'prop-types';
 
@@ -11,7 +11,8 @@ const CONTAINER_HEIGHT = FULL_HEIGHT - 100;
 class SwipeablePanel extends React.Component {
 	static propTypes = {
 		isActive: PropTypes.bool.isRequired,
-		onClose: PropTypes.func
+		onClose: PropTypes.func,
+		fullWidth: PropTypes.bool
 	};
 
 	constructor(props) {
@@ -110,7 +111,11 @@ class SwipeablePanel extends React.Component {
 		return showComponent ? (
 			<Animated.View style={[ SwipeablePanelStyles.background, { opacity: opacity } ]}>
 				<Animated.View
-					style={[ SwipeablePanelStyles.container, { transform: this.pan.getTranslateTransform() } ]}
+					style={[
+						SwipeablePanelStyles.container,
+						{ width: this.props.fullWidth ? FULL_WIDTH : FULL_WIDTH - 50 },
+						{ transform: this.pan.getTranslateTransform() }
+					]}
 					{...this._panResponder.panHandlers}
 				>
 					<Bar />
