@@ -1,6 +1,6 @@
 
 <div align="center">
- <img src="screenshots/ios.gif" width="200" height="400">
+ <img src="https://github.com/enesozturk/rn-swipeable-panel/blob/master/screenshots/ios.gif" width="200" height="400">
 </div>
 
 <br/>
