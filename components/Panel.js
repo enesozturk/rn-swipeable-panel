@@ -47,8 +47,8 @@ class SwipeablePanel extends React.Component {
 	componentDidMount = () => {};
 
 	componentDidUpdate(prevProps, prevState) {
-		if (prevProps.active != this.props.active) {
-			if (this.props.active) this.openDetails();
+		if (prevProps.isActive != this.props.isActive) {
+			if (this.props.isActive) this.openDetails();
 			else this.closeDetails();
 		}
 	}
@@ -134,6 +134,7 @@ const SwipeablePanelStyles = StyleSheet.create({
 		position: 'absolute',
 		zIndex: 1,
 		justifyContent: 'center',
+		alignItems: 'center',
 		width: FULL_WIDTH,
 		height: FULL_HEIGHT
 	},
@@ -148,7 +149,6 @@ const SwipeablePanelStyles = StyleSheet.create({
 		justifyContent: 'flex-start',
 		backgroundColor: 'white',
 		bottom: 0,
-		left: '5%',
 		borderRadius: 20,
 		shadowColor: '#000',
 		shadowOffset: {

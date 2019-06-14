@@ -73,7 +73,7 @@ export default class App extends Component {
             <View style={styles.container}>
                 <Text style={styles.welcome}>Welcome to React Native!</Text>
                 <Text style={styles.instructions}>To get started, edit App.js</Text>
-                <SwipeablePanel active={this.state.swipeablePanelActive} onClose={() => this.closePanel()} />
+                <SwipeablePanel isActive={this.state.swipeablePanelActive} onClose={() => this.closePanel()} />
             </View>
         );
     }
