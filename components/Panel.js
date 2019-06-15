@@ -30,12 +30,14 @@ class SwipeablePanel extends React.Component {
 				this.pan.setOffset({ x: this.pan.x._value, y: this.pan.y._value });
 				this.pan.setValue({ x: 0, y: 0 });
 			},
-			onPanResponderMove: Animated.event([ null, { dx: 0, dy: this.pan.y } ]),
+			onPanResponderMove: (evt, gestureState) => {
+				const currentTop = this.pan.y._offset + gestureState.dy;
+				if (currentTop > 0) this.pan.setValue({ x: 0, y: gestureState.dy });
+			},
 			onPanResponderRelease: (evt, { vx, vy }) => {
 				this.pan.flattenOffset();
 
 				const distance = this.oldPan.y - this.pan.y._value;
-				this.setState({ top: distance });
 
 				if (distance < -100) this._animateClosingAndOnCloseProp();
 				else if (distance > 0 && distance > 50) this._animateToLargePanel();

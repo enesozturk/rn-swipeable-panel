@@ -97,3 +97,4 @@ export default class App extends Component {
 #### TODOs
 
 - [x] Add full width option
+- [x] Disable swipe up when panel is full open 
