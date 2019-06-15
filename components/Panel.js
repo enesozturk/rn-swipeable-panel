@@ -1,6 +1,7 @@
 import React from 'react';
-import { StyleSheet, Animated, Dimensions, PanResponder, Easing } from 'react-native';
+import { StyleSheet, ScrollView, TouchableHighlight, Animated, Dimensions, PanResponder, Easing } from 'react-native';
 import { Bar } from './Bar';
+import { Close } from './Close';
 
 import PropTypes from 'prop-types';
 
@@ -19,7 +20,8 @@ class SwipeablePanel extends React.Component {
 		super(props);
 		this.state = {
 			showComponent: false,
-			opacity: new Animated.Value(0)
+			opacity: new Animated.Value(0),
+			canScroll: false
 		};
 		this.pan = new Animated.ValueXY({ x: 0, y: FULL_HEIGHT });
 		this.oldPan = { x: 0, y: 0 };
@@ -66,6 +68,7 @@ class SwipeablePanel extends React.Component {
 			easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
 			duration: 300
 		}).start();
+		this.setState({ canScroll: true });
 	};
 
 	_animateToSmallPanel = () => {
@@ -103,8 +106,12 @@ class SwipeablePanel extends React.Component {
 			duration: 300
 		}).start();
 		setTimeout(() => {
-			this.setState({ showComponent: false });
+			this.setState({ showComponent: false, canScroll: false });
 		}, 600);
+	};
+
+	onPressCloseButton = () => {
+		this._animateClosingAndOnCloseProp();
 	};
 
 	render() {
@@ -121,7 +128,14 @@ class SwipeablePanel extends React.Component {
 					{...this._panResponder.panHandlers}
 				>
 					<Bar />
-					{this.props.children}
+					<Close onPress={this.onPressCloseButton} />
+					<ScrollView onScroll={this.onScroll} contentContainerStyle={{ width: '100%' }}>
+						{this.state.canScroll ? (
+							<TouchableHighlight>{this.props.children}</TouchableHighlight>
+						) : (
+							this.props.children
+						)}
+					</ScrollView>
 				</Animated.View>
 			</Animated.View>
 		) : null;

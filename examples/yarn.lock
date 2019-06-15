@@ -4764,7 +4764,7 @@ prompts@^2.0.1:
     kleur "^3.0.2"
     sisteransi "^1.0.0"
 
-prop-types@^15.5.8, prop-types@^15.6.2:
+prop-types@^15.5.8, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -5193,10 +5193,12 @@ rimraf@~2.2.6:
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
   integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
 
-rn-swipeable-panel@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/rn-swipeable-panel/-/rn-swipeable-panel-1.0.0.tgz#92fdd63453bc67a1ee6230a71792e0119d9bb9f8"
-  integrity sha512-wjWqI+GlVC+yP4fMynFrzTQv6+kvoWOBZjf4/oHT7hfEOP6CMg5UAxpGAf8hxpDOUNqei0oCufeLrzvyw/TLtQ==
+rn-swipeable-panel@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/rn-swipeable-panel/-/rn-swipeable-panel-1.0.5.tgz#5c49ec86058dbf08cb1607036db5ac94792b0d07"
+  integrity sha512-nOIxts59aVmqLvoJ6P8E0FDzNvHF88IZuPkOYdhO87ZVop9GRV0skwoXmX/svBhNO2XfhvwoCto0yBq9RkYuwQ==
+  dependencies:
+    prop-types "^15.7.2"
 
 rsvp@^3.3.3:
   version "3.6.2"

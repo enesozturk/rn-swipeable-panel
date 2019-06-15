@@ -92,9 +92,15 @@ export default class App extends Component {
 
 #### Releases
 
-- 1.0.0 - Initial release
+- 1.0.2 - Initial release
+- 1.0.3 - Full width option
+- 1.0.4 - Prop and styling fixes
+- 1.0.5 - Disable swipe up when panel is full open 
+- 1.0.6 - Scrollable content and close button
 
 #### TODOs
 
 - [x] Add full width option
 - [x] Disable swipe up when panel is full open 
+- [x] Scrollable content
+- [x] Add close button
