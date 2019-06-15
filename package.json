@@ -1,6 +1,6 @@
 {
 	"name": "rn-swipeable-panel",
-	"version": "1.0.0",
+	"version": "1.0.5",
 	"description": "Swipeable panel for react native",
 	"main": "index.js",
 	"keywords": [
@@ -19,7 +19,22 @@
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/enesozturk/rn-swipeable-panel"
+	},
+	"bugs": {
+		"url": "https://github.com/enesozturk/rn-swipeable-panel/issues"
+	},
+	"homepage": "https://github.com/enesozturk/rn-swipeable-panel",
+	"files": [ "components" ],
 	"author": "Enes Ozturk",
+	"contributors": [
+		{
+			"name": "enesozturk",
+			"email": "enesozturk.d@gmail.com"
+		}
+	],
 	"license": "ISC",
 	"devDependencies": {
 		"metro-react-native-babel-preset": "^0.54.1"

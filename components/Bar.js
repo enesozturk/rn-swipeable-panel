@@ -7,7 +7,7 @@ export const Bar = ({}) => {
 
 const BarStyles = StyleSheet.create({
 	bar: {
-		width: '60%',
+		width: '40%',
 		height: 6,
 		borderRadius: 5,
 		marginTop: 10,
