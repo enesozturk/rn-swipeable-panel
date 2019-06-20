@@ -129,7 +129,7 @@ class SwipeablePanel extends React.Component {
 				>
 					<Bar />
 					<Close onPress={this.onPressCloseButton} />
-					<ScrollView onScroll={this.onScroll} contentContainerStyle={{ width: '100%' }}>
+					<ScrollView contentContainerStyle={{ width: '100%' }}>
 						{this.state.canScroll ? (
 							<TouchableHighlight>{this.props.children}</TouchableHighlight>
 						) : (
@@ -161,8 +161,6 @@ const SwipeablePanelStyles = StyleSheet.create({
 		transform: [ { translateY: FULL_HEIGHT - 100 } ],
 		display: 'flex',
 		flexDirection: 'column',
-		alignItems: 'center',
-		justifyContent: 'flex-start',
 		backgroundColor: 'white',
 		bottom: 0,
 		borderRadius: 20,

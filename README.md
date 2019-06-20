@@ -97,6 +97,7 @@ export default class App extends Component {
 - 1.0.4 - Prop and styling fixes
 - 1.0.5 - Disable swipe up when panel is full open 
 - 1.0.6 - Scrollable content and close button
+- 1.0.7 - Changes for nested scrollview usage (Horizontal scrollview)
 
 #### TODOs
 
@@ -104,3 +105,4 @@ export default class App extends Component {
 - [x] Disable swipe up when panel is full open 
 - [x] Scrollable content
 - [x] Add close button
+- [x] Horizontal scrollview inside the panel
