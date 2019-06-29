@@ -8,15 +8,15 @@
 
 import React, { Component } from 'react';
 import { Platform, StyleSheet, Text, View } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
+
+import { Header } from './components/Header';
+import List from './scenes/List';
+import { PanelContent } from './components/PanelContent';
+
 import SwipeablePanel from 'rn-swipeable-panel';
 
-const instructions = Platform.select({
-	ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-	android: 'Double tap R on your keyboard to reload,\n' + 'Shake or press menu button for dev menu'
-});
-
-type Props = {};
-export default class App extends Component<Props> {
+export default class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -24,9 +24,7 @@ export default class App extends Component<Props> {
 		};
 	}
 
-	componentDidMount = () => {
-		this.openPanel();
-	};
+	componentDidMount = () => {};
 
 	openPanel = () => {
 		this.setState({ swipeablePanelActive: true });
@@ -34,19 +32,37 @@ export default class App extends Component<Props> {
 
 	closePanel = () => {
 		this.setState({ swipeablePanelActive: false });
-		setTimeout(() => {
-			this.openPanel();
-		}, 1000);
 	};
 
 	render() {
 		return (
-			<View style={styles.container}>
-				<Text style={styles.welcome}>Welcome to React Native!</Text>
-				<Text style={styles.instructions}>To get started, edit App.js</Text>
-				<Text style={styles.instructions}>{instructions}</Text>
-				<SwipeablePanel isActive={this.state.swipeablePanelActive} onClose={() => this.closePanel()} />
-			</View>
+			<SafeAreaView style={styles.container}>
+				<Header title={'List'} />
+				<List onOpenPanel={this.openPanel} />
+				{/* <SwipeablePanel
+					isActive={this.state.swipeablePanelActive}
+					onClose={this.closePanel}
+				>
+					<PanelContent />
+				</SwipeablePanel> */}
+
+				{/* <SwipeablePanel
+					fullWidth
+					isActive={this.state.swipeablePanelActive}
+					onClose={this.closePanel}
+				>
+					<PanelContent />
+				</SwipeablePanel> */}
+
+				<SwipeablePanel
+					fullWidth
+					isActive={this.state.swipeablePanelActive}
+					onClose={this.closePanel}
+					onPressCloseButton={this.closePanel}
+				>
+					<PanelContent />
+				</SwipeablePanel>
+			</SafeAreaView>
 		);
 	}
 }
@@ -56,7 +72,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: 'center',
 		alignItems: 'center',
-		backgroundColor: '#F5FCFF'
+		backgroundColor: '#EEF4F6'
 	},
 	welcome: {
 		fontSize: 20,

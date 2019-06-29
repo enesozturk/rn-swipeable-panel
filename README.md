@@ -1,6 +1,10 @@
 
 <div align="center">
- <img src="https://github.com/enesozturk/rn-swipeable-panel/blob/master/screenshots/ios.gif" width="200" height="400">
+
+| Default                        | Full width       | Close Button                                        |
+| --------------------------------- | ---------- | ------------------------------------------------------ |
+| <img src="https://github.com/enesozturk/rn-swipeable-panel/blob/master/screenshots/default.gif" width="200" height="400"> | <img src="https://github.com/enesozturk/rn-swipeable-panel/blob/master/screenshots/fullWidth.gif" width="200" height="400"> | <img src="https://github.com/enesozturk/rn-swipeable-panel/blob/master/screenshots/closeButton.gif" width="200" height="400"> |
+
 </div>
 
 <br/>
@@ -73,7 +77,14 @@ export default class App extends Component {
             <View style={styles.container}>
                 <Text style={styles.welcome}>Welcome to React Native!</Text>
                 <Text style={styles.instructions}>To get started, edit App.js</Text>
-                <SwipeablePanel isActive={this.state.swipeablePanelActive} onClose={() => this.closePanel()} />
+                <SwipeablePanel
+					fullWidth
+					isActive={this.state.swipeablePanelActive}
+					onClose={this.closePanel}
+					onPressCloseButton={this.closePanel}
+				>
+					<PanelContent /> {/* Your Content Here */} 
+				</SwipeablePanel>
             </View>
         );
     }
@@ -86,9 +97,10 @@ export default class App extends Component {
 
 | Properties                        | Type       | Description                                            | Default                                     |
 | --------------------------------- | ---------- | ------------------------------------------------------ | ------------------------------------------- |
-| **isActive**                      | `bool`     | Show/Hide the panel                                    | `"false"`                                   |
-| **onClosed**                      | `Function` | Fired when the panel is closed                         |                                             |
-| **fullWidth**                     | `bool`     | Set true if you want to make full with panel           | `"false"`                                   |
+| **isActive**                      | `bool`     | Show/Hide the panel                                    | `false`                                   |
+| **onClose**                       | `Function` | Fired when the panel is closed                         |                                             |
+| **onPressCloseButton**            | `Function` | Use this if you want to show close button. *Using same function with onClose is recommended as example above*                         |                                             |
+| **fullWidth**                     | `bool`     | Set true if you want to make full with panel           | `false`                                   |
 
 #### Releases
 
@@ -98,6 +110,7 @@ export default class App extends Component {
 - 1.0.5 - Disable swipe up when panel is full open 
 - 1.0.6 - Scrollable content and close button
 - 1.0.7 - Changes for nested scrollview usage (Horizontal scrollview)
+- 1.0.8 - Optional close button
 
 #### TODOs
 
@@ -106,3 +119,4 @@ export default class App extends Component {
 - [x] Scrollable content
 - [x] Add close button
 - [x] Horizontal scrollview inside the panel
+- [x] Optional close button
