@@ -111,6 +111,7 @@ export default class App extends Component {
 - 1.0.6 - Scrollable content and close button
 - 1.0.7 - Changes for nested scrollview usage (Horizontal scrollview)
 - 1.0.8 - Optional close button
+- 1.0.9 - useNativeDriver for better performance
 
 #### TODOs
 
@@ -120,3 +121,4 @@ export default class App extends Component {
 - [x] Add close button
 - [x] Horizontal scrollview inside the panel
 - [x] Optional close button
+- [x] Native driver for all animations for better performance

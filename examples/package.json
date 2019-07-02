@@ -11,7 +11,7 @@
 		"react-native": "0.59.8",
 		"react-native-gesture-handler": "^1.3.0",
 		"react-navigation": "^3.11.0",
-		"rn-swipeable-panel": "^1.0.7"
+		"rn-swipeable-panel": "^1.0.9"
 	},
 	"devDependencies": {
 		"@babel/core": "^7.4.5",
