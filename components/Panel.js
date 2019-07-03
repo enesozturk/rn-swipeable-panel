@@ -95,41 +95,43 @@ export default class SwipeablePanel extends React.Component {
 
 	openDetails = () => {
 		this.setState({ showComponent: true, status: 1 });
-		Animated.timing(this.pan, {
-			toValue: { x: 0, y: FULL_HEIGHT - 400 },
-			easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
-			duration: 600,
-			useNativeDriver: true
-		}).start();
-		Animated.timing(this.state.opacity, {
-			toValue: 1,
-			easing: Easing.bezier(0.5, 0.5, 0.5, 0.5),
-			duration: 300,
-			useNativeDriver: true
-		}).start();
+		Animated.parallel([
+			Animated.timing(this.pan, {
+				toValue: { x: 0, y: FULL_HEIGHT - 400 },
+				easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
+				duration: 500,
+				useNativeDriver: true
+			}).start(),
+			Animated.timing(this.state.opacity, {
+				toValue: 1,
+				easing: Easing.bezier(0.5, 0.5, 0.5, 0.5),
+				duration: 300,
+				useNativeDriver: true
+			}).start()
+		]);
 		this.oldPan = { x: 0, y: FULL_HEIGHT - 400 };
 	};
 
 	closeDetails = (isCloseButtonPress) => {
-		Animated.timing(this.pan, {
-			toValue: { x: 0, y: FULL_HEIGHT },
-			easing: isCloseButtonPress ? Easing.bezier(0.98, -0.11, 0.44, 0.59) : Easing.linear,
-			duration: this.state.status == 2 ? 600 : 300,
-			useNativeDriver: true
-		}).start();
-		if (this.state.status == 1) {
-			Animated.timing(this.state.opacity, {
-				toValue: 0,
-				easing: Easing.bezier(0.5, 0.5, 0.5, 0.5),
-				duration: 1000,
+		Animated.parallel([
+			Animated.timing(this.pan, {
+				toValue: { x: 0, y: FULL_HEIGHT },
+				easing: isCloseButtonPress ? Easing.bezier(0.98, -0.11, 0.44, 0.59) : Easing.linear,
+				duration: this.state.status == 2 ? 500 : 300,
 				useNativeDriver: true
-			}).start();
-		}
+			}).start(),
+			Animated.timing(this.state.opacity, {
+				toValue: this.state.status == 1 ? 0 : 1,
+				easing: Easing.bezier(0.5, 0.5, 0.5, 0.5),
+				duration: this.state.status == 2 ? 500 : 300,
+				useNativeDriver: true
+			}).start()
+		]);
 
 		setTimeout(() => {
-			if (this.props.onClose != 'undefined' && this.props.onClose) this.props.onClose();
 			this.setState({ showComponent: false, canScroll: false, status: 0 });
-		}, this.state.status == 2 ? 590 : 290);
+			if (this.props.onClose != 'undefined' && this.props.onClose) this.props.onClose();
+		}, this.state.status == 2 ? 450 : 250);
 	};
 
 	onPressCloseButton = () => {
