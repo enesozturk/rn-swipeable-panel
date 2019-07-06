@@ -1,10 +1,6 @@
 
 <div align="center">
-
-| Default                        | Full width       | Close Button                                        |
-| --------------------------------- | ---------- | ------------------------------------------------------ |
-| <img src="https://github.com/enesozturk/rn-swipeable-panel/blob/master/screenshots/default.gif" width="200" height="400"> | <img src="https://github.com/enesozturk/rn-swipeable-panel/blob/master/screenshots/fullWidth.gif" width="200" height="400"> | <img src="https://github.com/enesozturk/rn-swipeable-panel/blob/master/screenshots/closeButton.gif" width="200" height="400"> |
-
+    <img src="https://github.com/enesozturk/rn-swipeable-panel/blob/master/screenshots/default.gif" width="200" height="400">
 </div>
 
 <br/>
@@ -12,7 +8,8 @@
 
 <br/>
 <div align="center"><h3>React Native Swipeable Panel<h3></div>
-<div align="center">React Native Panel animates up and controllable with pan gestures</div>
+<div align="center">React Native Panel animates up and controllable with p
+<div align="center">To see other examples <a href="https://github.com/enesozturk/rn-swipeable-panel/tree/master/examples">click here</a></div>
 
 <br/>
 
