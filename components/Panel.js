@@ -52,10 +52,17 @@ export default class SwipeablePanel extends React.Component {
 				this.pan.flattenOffset();
 
 				const distance = this.oldPan.y - this.pan.y._value;
+				const absDistance = Math.abs(distance);
 
-				if (distance < -100) this._animateClosingAndOnCloseProp(false);
-				else if (distance > 0 && distance > 50) this._animateToLargePanel();
-				else this._animateToSmallPanel();
+				if (this.state.status == 2) {
+					if (0 < absDistance && absDistance < 100) this._animateToLargePanel();
+					else if (100 < absDistance && absDistance < CONTAINER_HEIGHT - 200) this._animateToSmallPanel();
+					else this._animateClosingAndOnCloseProp();
+				} else {
+					if (distance < -100) this._animateClosingAndOnCloseProp(false);
+					else if (distance > 0 && distance > 50) this._animateToLargePanel();
+					else this._animateToSmallPanel();
+				}
 			}
 		});
 	}
@@ -64,8 +71,10 @@ export default class SwipeablePanel extends React.Component {
 
 	componentDidUpdate(prevProps, prevState) {
 		if (prevProps.isActive != this.props.isActive) {
-			if (this.props.isActive) this.openDetails();
-			else this.closeDetails(true);
+			if (this.props.isActive) {
+				if (this.props.openLarge) this.openLarge();
+				else this.openDetails();
+			} else this.closeDetails(true);
 		}
 	}
 
@@ -81,6 +90,7 @@ export default class SwipeablePanel extends React.Component {
 			useNativeDriver: true
 		}).start();
 		this.setState({ canScroll: true, status: 2 });
+		this.oldPan = { x: 0, y: 0 };
 	};
 
 	_animateToSmallPanel = () => {
@@ -91,6 +101,26 @@ export default class SwipeablePanel extends React.Component {
 			useNativeDriver: true
 		}).start();
 		this.setState({ status: 1 });
+		this.oldPan = { x: 0, y: FULL_HEIGHT - 400 };
+	};
+
+	openLarge = () => {
+		this.setState({ showComponent: true, status: 2, canScroll: true });
+		Animated.parallel([
+			Animated.timing(this.pan, {
+				toValue: { x: 0, y: 0 },
+				easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
+				duration: 500,
+				useNativeDriver: true
+			}).start(),
+			Animated.timing(this.state.opacity, {
+				toValue: 1,
+				easing: Easing.bezier(0.5, 0.5, 0.5, 0.5),
+				duration: 300,
+				useNativeDriver: true
+			}).start()
+		]);
+		this.oldPan = { x: 0, y: 0 };
 	};
 
 	openDetails = () => {

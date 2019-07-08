@@ -75,7 +75,7 @@ export default class App extends Component {
                 <Text style={styles.welcome}>Welcome to React Native!</Text>
                 <Text style={styles.instructions}>To get started, edit App.js</Text>
                 <SwipeablePanel
-					fullWidth
+                    fullWidth
 					isActive={this.state.swipeablePanelActive}
 					onClose={this.closePanel}
 					onPressCloseButton={this.closePanel}
@@ -98,6 +98,7 @@ export default class App extends Component {
 | **onClose**                       | `Function` | Fired when the panel is closed                         |                                             |
 | **onPressCloseButton**            | `Function` | Use this if you want to show close button. *Using same function with onClose is recommended as example above*                         |                                             |
 | **fullWidth**                     | `bool`     | Set true if you want to make full with panel           | `false`                                   |
+| **openLarge**                     | `bool`     | Set true if you want to open panel large by default           | `false`                                   |
 
 #### Releases
 
@@ -109,6 +110,7 @@ export default class App extends Component {
 - 1.0.7 - Changes for nested scrollview usage (Horizontal scrollview)
 - 1.0.8 - Optional close button
 - 1.0.9 - useNativeDriver for better performance
+- 1.0.11 - openLarge parameter added
 
 #### TODOs
 
@@ -119,3 +121,4 @@ export default class App extends Component {
 - [x] Horizontal scrollview inside the panel
 - [x] Optional close button
 - [x] Native driver for all animations for better performance
+- [x] Open large panel by default
