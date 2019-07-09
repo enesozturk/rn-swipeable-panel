@@ -56,6 +56,7 @@ export default class App extends Component {
 
 				<SwipeablePanel
 					fullWidth
+					openLarge
 					isActive={this.state.swipeablePanelActive}
 					onClose={this.closePanel}
 					onPressCloseButton={this.closePanel}

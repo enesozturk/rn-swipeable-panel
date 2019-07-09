@@ -1,6 +1,6 @@
 {
 	"name": "rn-swipeable-panel",
-	"version": "1.0.11",
+	"version": "1.0.12",
 	"description": "Swipeable panel for react native",
 	"main": "index.js",
 	"keywords": [
@@ -14,7 +14,11 @@
 		"panel",
 		"swipeable-panel",
 		"swipe-up",
-		"swipe-down"
+		"swipe-down",
+		"bottom",
+		"bottom-panel",
+		"bottom-up",
+		"bottom-up-panel"
 	],
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
