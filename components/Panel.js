@@ -57,7 +57,7 @@ export default class SwipeablePanel extends React.Component {
 				if (this.state.status == 2) {
 					if (0 < absDistance && absDistance < 100) this._animateToLargePanel();
 					else if (100 < absDistance && absDistance < CONTAINER_HEIGHT - 200) this._animateToSmallPanel();
-					else this._animateClosingAndOnCloseProp();
+					else if (CONTAINER_HEIGHT - 200 < absDistance) this._animateClosingAndOnCloseProp();
 				} else {
 					if (distance < -100) this._animateClosingAndOnCloseProp(false);
 					else if (distance > 0 && distance > 50) this._animateToLargePanel();

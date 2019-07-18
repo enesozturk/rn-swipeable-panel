@@ -14,54 +14,55 @@ import { Header } from './components/Header';
 import List from './scenes/List';
 import { PanelContent } from './components/PanelContent';
 
+import { Settings } from './components/Settings';
+import { About } from './components/About';
+
 import SwipeablePanel from 'rn-swipeable-panel';
 
 export default class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			swipeablePanelActive: false
+			swipeablePanelActive: false,
+			content: () => null
 		};
 	}
 
 	componentDidMount = () => {};
 
-	openPanel = () => {
-		this.setState({ swipeablePanelActive: true });
+	openAboutPanel = () => {
+		this.setState({ swipeablePanelActive: true, openLarge: true, content: () => <About /> });
+	};
+
+	openSettingsPanel = () => {
+		this.setState({ swipeablePanelActive: true, content: () => <Settings /> });
+	};
+
+	openDefaultPanel = () => {
+		this.setState({ swipeablePanelActive: true, content: () => null });
 	};
 
 	closePanel = () => {
-		this.setState({ swipeablePanelActive: false });
+		this.setState({ swipeablePanelActive: false, openLarge: false, content: () => null });
 	};
 
 	render() {
 		return (
 			<SafeAreaView style={styles.container}>
-				<Header title={'List'} />
-				<List onOpenPanel={this.openPanel} />
-				{/* <SwipeablePanel
-					isActive={this.state.swipeablePanelActive}
-					onClose={this.closePanel}
-				>
-					<PanelContent />
-				</SwipeablePanel> */}
-
-				{/* <SwipeablePanel
-					fullWidth
-					isActive={this.state.swipeablePanelActive}
-					onClose={this.closePanel}
-				>
-					<PanelContent />
-				</SwipeablePanel> */}
-
+				<Header title={'Examples'} />
+				<List
+					openDefaultPanel={this.openDefaultPanel}
+					openSettingsPanel={this.openSettingsPanel}
+					openAboutPanel={this.openAboutPanel}
+				/>
 				<SwipeablePanel
 					fullWidth
-					openLarge
+					openLarge={this.state.openLarge}
 					isActive={this.state.swipeablePanelActive}
 					onClose={this.closePanel}
 					onPressCloseButton={this.closePanel}
 				>
-					<PanelContent />
+					{this.state.content()}
 				</SwipeablePanel>
 			</SafeAreaView>
 		);
