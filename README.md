@@ -2,13 +2,10 @@
 <div align="center">
     <img src="https://github.com/enesozturk/rn-swipeable-panel/blob/master/screenshots/default.gif" width="200" height="400">
 </div>
-
 <br/>
 
-
-<br/>
 <div align="center"><h3>React Native Swipeable Panel<h3></div>
-<div align="center">React Native Panel animates up and controllable with p
+<div align="center">React Native Panel animates up and controllable with pan gestures</div>
 <div align="center">To see other examples <a href="https://github.com/enesozturk/rn-swipeable-panel/tree/master/examples">click here</a></div>
 
 <br/>
@@ -16,13 +13,15 @@
 <div align="center">
 
 [![npm version](https://img.shields.io/npm/v/rn-swipeable-panel.svg)](https://www.npmjs.com/package/rn-swipeable-panel)
+
 </div>
+
 <br/>
 
-React Native Swipeable Panel that animate from bottom and controllable with pan gestures. You can extend panel by swiping up, make it small or close by swiping down with pan gestures. Feel free to redesign inside of panel.
+React Native Swipeable Panel that animate from bottom and controllable with pan gestures. You can extend panel by swiping up, make it small or close by swiping down with pan gestures. Feel free to redesign inside of panel
 
 
-## Getting started
+## ⚙️ Installation
 ```
 $ npm install rn-swipeable-panel --save
 ```
@@ -37,7 +36,7 @@ $ yarn add rn-swipeable-panel
 
 
 
-## Example
+## 🚀 How to use
 
 ```javascript
 import React from 'react';
@@ -89,7 +88,7 @@ export default class App extends Component {
 
 ```
 
-## Options
+## ☝️ Options
 <br/>
 
 | Properties                        | Type       | Description                                            | Default                                     |
@@ -100,7 +99,7 @@ export default class App extends Component {
 | **fullWidth**                     | `bool`     | Set true if you want to make full with panel           | `false`                                   |
 | **openLarge**                     | `bool`     | Set true if you want to open panel large by default           | `false`                                   |
 
-#### Releases
+#### 📦 Releases
 
 - 1.0.2 - Initial release
 - 1.0.3 - Full width option
@@ -112,7 +111,7 @@ export default class App extends Component {
 - 1.0.9 - useNativeDriver for better performance
 - 1.0.11 - openLarge parameter added
 
-#### TODOs
+#### ☑️ TODOs
 
 - [x] Add full width option
 - [x] Disable swipe up when panel is full open 
@@ -122,3 +121,10 @@ export default class App extends Component {
 - [x] Optional close button
 - [x] Native driver for all animations for better performance
 - [x] Open large panel by default
+
+#### ⭐️ Show Your Support
+Please give a ⭐️ if this project helped you!
+
+#### 👏 Contributing
+
+If you have any questions or requests or want to contribute to `rn-swipeable-panel`, please write the [issue](https://github.com/enesozturk/rn-swipeable-panel/issues) or give me a Pull Request freely.
