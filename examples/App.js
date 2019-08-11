@@ -7,46 +7,87 @@
  */
 
 import React, { Component } from 'react';
-import { Platform, StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 
 import { Header } from './components/Header';
 import List from './scenes/List';
-import { PanelContent } from './components/PanelContent';
 
 import { Settings } from './components/Settings';
 import { About } from './components/About';
+import { Configurations } from './components/Configurations';
 
 import SwipeablePanel from 'rn-swipeable-panel';
+import { thisExpression } from '@babel/types';
 
 export default class App extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			swipeablePanelActive: false,
-			content: () => null
+			isOpen: false,
+			content: () => null,
+			fullWidth: true,
+			customPanel: false,
+			customPanelState: {
+				isOpen: false,
+				openLarge: false,
+				fullWidth: false,
+				noBackgroundOpacity: false,
+				closeButton: false
+			}
 		};
 	}
 
 	componentDidMount = () => {};
 
 	openAboutPanel = () => {
-		this.setState({ swipeablePanelActive: true, openLarge: true, content: () => <About /> });
+		this.setState({
+			isOpen: true,
+			openLarge: true,
+			closeButton: this.closePanel,
+			noBackgroundOpacity: false,
+			content: () => <About />
+		});
 	};
 
 	openSettingsPanel = () => {
-		this.setState({ swipeablePanelActive: true, content: () => <Settings /> });
+		this.setState({
+			isOpen: true,
+			openLarge: false,
+			closeButton: this.closePanel,
+			noBackgroundOpacity: false,
+			content: () => <Settings />
+		});
+	};
+
+	openConfigurationsPanel = () => {
+		this.setState({
+			customPanelState: { ...this.state.customPanelState, isOpen: true },
+			content: () => (
+				<Configurations state={this.state.customPanelState} changeState={this.changeCustomPanelState} />
+			)
+		});
+	};
+
+	changeCustomPanelState = (state) => {
+		this.setState({ customPanelState: { ...state } });
 	};
 
 	openDefaultPanel = () => {
-		this.setState({ swipeablePanelActive: true, content: () => null });
+		this.setState({ isOpen: true, openLarge: false, content: () => null });
 	};
 
 	closePanel = () => {
-		this.setState({ swipeablePanelActive: false, openLarge: false, content: () => null });
+		this.setState({
+			customPanelState: { ...this.state.customPanelState, isOpen: false },
+			isOpen: false,
+			content: () => null
+		});
 	};
 
 	render() {
+		const panelState = this.state.customPanelState.isOpen ? this.state.customPanelState : this.state;
+
 		return (
 			<SafeAreaView style={styles.container}>
 				<Header title={'Examples'} />
@@ -54,13 +95,15 @@ export default class App extends Component {
 					openDefaultPanel={this.openDefaultPanel}
 					openSettingsPanel={this.openSettingsPanel}
 					openAboutPanel={this.openAboutPanel}
+					openConfigurationsPanel={this.openConfigurationsPanel}
 				/>
 				<SwipeablePanel
-					fullWidth
-					openLarge={this.state.openLarge}
-					isActive={this.state.swipeablePanelActive}
+					fullWidth={panelState.fullWidth}
+					noBackgroundOpacity={panelState.noBackgroundOpacity}
+					openLarge={panelState.openLarge}
+					isActive={panelState.isOpen}
 					onClose={this.closePanel}
-					onPressCloseButton={this.closePanel}
+					onPressCloseButton={panelState.closeButton ? this.closePanel : null}
 				>
 					{this.state.content()}
 				</SwipeablePanel>

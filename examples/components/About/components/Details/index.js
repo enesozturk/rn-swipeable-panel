@@ -4,7 +4,6 @@ import { StyleSheet, View, Text } from 'react-native';
 export const Details = ({}) => {
 	return (
 		<View style={Styles.container}>
-			<Text style={Styles.title}>{'Details'}</Text>
 			<View style={Styles.content}>
 				<Text style={Styles.paragraph}>
 					{

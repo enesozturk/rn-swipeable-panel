@@ -1,14 +1,5 @@
 import React from 'react';
-import {
-	StyleSheet,
-	ScrollView,
-	TouchableHighlight,
-	Animated,
-	Dimensions,
-	PanResponder,
-	Easing,
-	Text
-} from 'react-native';
+import { StyleSheet, ScrollView, TouchableHighlight, Animated, Dimensions, PanResponder, Easing } from 'react-native';
 import { Bar } from './Bar';
 import { Close } from './Close';
 
@@ -23,7 +14,8 @@ export default class SwipeablePanel extends React.Component {
 		isActive: PropTypes.bool.isRequired,
 		onClose: PropTypes.func,
 		fullWidth: PropTypes.bool,
-		onPressCloseButton: PropTypes.func
+		onPressCloseButton: PropTypes.func,
+		noBackgroundOpacity: PropTypes.bool
 	};
 
 	constructor(props) {
@@ -170,9 +162,15 @@ export default class SwipeablePanel extends React.Component {
 
 	render() {
 		const { showComponent, opacity } = this.state;
+		const { noBackgroundOpacity } = this.props;
 
 		return showComponent ? (
-			<Animated.View style={[ SwipeablePanelStyles.background, { opacity: opacity } ]}>
+			<Animated.View
+				style={[
+					SwipeablePanelStyles.background,
+					{ opacity, backgroundColor: noBackgroundOpacity ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.5)' }
+				]}
+			>
 				<Animated.View
 					style={[
 						SwipeablePanelStyles.container,
@@ -200,7 +198,6 @@ export default class SwipeablePanel extends React.Component {
 
 const SwipeablePanelStyles = StyleSheet.create({
 	background: {
-		backgroundColor: 'rgba(0,0,0,0.5)',
 		position: 'absolute',
 		zIndex: 1,
 		justifyContent: 'center',

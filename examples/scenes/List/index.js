@@ -1,10 +1,14 @@
 import React from 'react';
-import { View, FlatList } from 'react-native';
+import { View, FlatList, Text } from 'react-native';
 
 import { Styles } from './styles';
 import { ListItem } from './components/ListItem';
 
-const ItemList = [ { id: 1, name: 'About', open: 'about' }, { id: 2, name: 'Settings', open: 'settings' } ];
+const ItemList = [
+	{ id: 1, name: 'About', open: 'about' },
+	{ id: 2, name: 'Settings', open: 'settings' },
+	{ id: 3, name: 'Configurations', open: 'configurations' }
+];
 
 export default class List extends React.Component {
 	constructor(props) {
@@ -24,6 +28,8 @@ export default class List extends React.Component {
 				return this.props.openAboutPanel;
 			case 'settings':
 				return this.props.openSettingsPanel;
+			case 'configurations':
+				return this.props.openConfigurationsPanel;
 			default:
 				return this.props.openDefaultPanel;
 		}

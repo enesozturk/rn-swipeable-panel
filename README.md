@@ -98,6 +98,7 @@ export default class App extends Component {
 | **onPressCloseButton**            | `Function` | Use this if you want to show close button. *Using same function with onClose is recommended as example above*                         |                                             |
 | **fullWidth**                     | `bool`     | Set true if you want to make full with panel           | `false`                                   |
 | **openLarge**                     | `bool`     | Set true if you want to open panel large by default           | `false`                                   |
+| **noBackgroundOpacity**                     | `bool`     | Set true if you want to disable black background opacity           | `false`                                   |
 
 #### 📦 Releases
 
@@ -110,6 +111,7 @@ export default class App extends Component {
 - 1.0.8 - Optional close button
 - 1.0.9 - useNativeDriver for better performance
 - 1.0.11 - openLarge parameter added
+- 1.0.11 - Added noBackgroundOpacity parameter
 
 #### ☑️ TODOs
 
@@ -121,6 +123,7 @@ export default class App extends Component {
 - [x] Optional close button
 - [x] Native driver for all animations for better performance
 - [x] Open large panel by default
+- [x] Add option to disable black background opacity
 
 #### ⭐️ Show Your Support
 Please give a ⭐️ if this project helped you!
