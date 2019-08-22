@@ -63,9 +63,6 @@ export default class App extends Component {
 
     closePanel = () => {
         this.setState({ swipeablePanelActive: false });
-        setTimeout(() => {
-        	this.openPanel();
-        }, 1000);
     };
 
     render() {
@@ -75,10 +72,10 @@ export default class App extends Component {
                 <Text style={styles.instructions}>To get started, edit App.js</Text>
                 <SwipeablePanel
                     fullWidth
-					isActive={this.state.swipeablePanelActive}
-					onClose={this.closePanel}
-					onPressCloseButton={this.closePanel}
-				>
+                    isActive={this.state.swipeablePanelActive}
+                    onClose={this.closePanel}
+                    onPressCloseButton={this.closePanel}
+                >
 					<PanelContent /> {/* Your Content Here */} 
 				</SwipeablePanel>
             </View>
