@@ -1,6 +1,6 @@
 
 <div align="center">
-    <img src="https://github.com/enesozturk/rn-swipeable-panel/blob/master/screenshots/rn-swipeable-panel.gif" width="200" height="400">
+    <img src="https://user-images.githubusercontent.com/19428358/63675284-1da66280-c7f1-11e9-98d6-d6577fee4798.gif" width="auto" height="600">
 </div>
 <br/>
 
