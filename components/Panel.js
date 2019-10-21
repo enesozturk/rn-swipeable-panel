@@ -17,10 +17,16 @@ export default class SwipeablePanel extends React.Component {
 		onPressCloseButton: PropTypes.func,
 		noBackgroundOpacity: PropTypes.bool,
 		containerStyle: PropTypes.object,
+		closeRootStyle: PropTypes.object,
+		closeIconStyle: PropTypes.object,
 	};
 
 	static defaultProps = {
 		containerStyle: {},
+		onClose: () => {},
+		fullWidth: true,
+		closeRootStyle: {},
+		closeIconStyle: {},
 	};
 
 	constructor(props) {
@@ -80,23 +86,13 @@ export default class SwipeablePanel extends React.Component {
 	};
 
 	_animateToLargePanel = () => {
-		Animated.spring(this.pan, {
-			toValue: { x: 0, y: 0 },
-			easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
-			duration: 200,
-			useNativeDriver: true
-		}).start();
+		this._animateSpringPan(0, 0, 200);
 		this.setState({ canScroll: true, status: 2 });
 		this.oldPan = { x: 0, y: 0 };
 	};
 
 	_animateToSmallPanel = () => {
-		Animated.spring(this.pan, {
-			toValue: { x: 0, y: FULL_HEIGHT - 400 },
-			easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
-			duration: 300,
-			useNativeDriver: true
-		}).start();
+		this._animateSpringPan(0, FULL_HEIGHT - 400, 300);
 		this.setState({ status: 1 });
 		this.oldPan = { x: 0, y: FULL_HEIGHT - 400 };
 	};
@@ -104,18 +100,8 @@ export default class SwipeablePanel extends React.Component {
 	openLarge = () => {
 		this.setState({ showComponent: true, status: 2, canScroll: true });
 		Animated.parallel([
-			Animated.timing(this.pan, {
-				toValue: { x: 0, y: 0 },
-				easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
-				duration: 500,
-				useNativeDriver: true
-			}).start(),
-			Animated.timing(this.state.opacity, {
-				toValue: 1,
-				easing: Easing.bezier(0.5, 0.5, 0.5, 0.5),
-				duration: 300,
-				useNativeDriver: true
-			}).start()
+			this._animateTimingPan(),
+			this._animateTimingOpacity(1, 300),
 		]);
 		this.oldPan = { x: 0, y: 0 };
 	};
@@ -123,77 +109,93 @@ export default class SwipeablePanel extends React.Component {
 	openDetails = () => {
 		this.setState({ showComponent: true, status: 1 });
 		Animated.parallel([
-			Animated.timing(this.pan, {
-				toValue: { x: 0, y: FULL_HEIGHT - 400 },
-				easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
-				duration: 500,
-				useNativeDriver: true
-			}).start(),
-			Animated.timing(this.state.opacity, {
-				toValue: 1,
-				easing: Easing.bezier(0.5, 0.5, 0.5, 0.5),
-				duration: 300,
-				useNativeDriver: true
-			}).start()
+			this._animateTimingPan(0, FULL_HEIGHT - 400),
+			this._animateTimingOpacity(1, 300),
 		]);
 		this.oldPan = { x: 0, y: FULL_HEIGHT - 400 };
 	};
 
 	closeDetails = (isCloseButtonPress) => {
+		const {status} = this.state;
+		const duration = status === 2 ? 500 : 300;
+		const easing = isCloseButtonPress ? Easing.bezier(0.98, -0.11, 0.44, 0.59) : Easing.linear;
+
 		Animated.parallel([
-			Animated.timing(this.pan, {
-				toValue: { x: 0, y: FULL_HEIGHT },
-				easing: isCloseButtonPress ? Easing.bezier(0.98, -0.11, 0.44, 0.59) : Easing.linear,
-				duration: this.state.status == 2 ? 500 : 300,
-				useNativeDriver: true
-			}).start(),
-			Animated.timing(this.state.opacity, {
-				toValue: this.state.status == 1 ? 0 : 1,
-				easing: Easing.bezier(0.5, 0.5, 0.5, 0.5),
-				duration: this.state.status == 2 ? 500 : 300,
-				useNativeDriver: true
-			}).start()
+			this._animateTimingPan(0, FULL_HEIGHT, duration, easing),
+			this._animateTimingOpacity(status === 1 ? 0 : 1, status === 2 ? 500 : 300),
 		]);
 
 		setTimeout(() => {
 			this.setState({ showComponent: false, canScroll: false, status: 0 });
-			if (this.props.onClose != 'undefined' && this.props.onClose) this.props.onClose();
-		}, this.state.status == 2 ? 450 : 250);
+			this.props.onClose();
+		}, status === 2 ? 450 : 250);
 	};
 
 	onPressCloseButton = () => {
 		this._animateClosingAndOnCloseProp(true);
 	};
 
+	_animateSpringPan = (x, y, duration) => {
+		return Animated.spring(this.pan, {
+			toValue: { x , y },
+			easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
+			duration: duration,
+			useNativeDriver: true
+		}).start();
+	};
+
+	_animateTimingOpacity = (toValue, duration) => {
+		return Animated.timing(this.state.opacity, {
+			toValue,
+			easing: Easing.bezier(0.5, 0.5, 0.5, 0.5),
+			duration,
+			useNativeDriver: true
+		}).start();
+	};
+
+	_animateTimingPan = (x = 0, y = 0, duration = 500, easing = Easing.bezier(0.05, 1.35, 0.2, 0.95)) => {
+		return Animated.timing(this.pan, {
+			toValue: { x, y },
+			easing,
+			duration,
+			useNativeDriver: true
+		}).start();
+	};
+
 	render() {
-		const { showComponent, opacity } = this.state;
-		const { noBackgroundOpacity, containerStyle } = this.props;
+		const { showComponent, opacity, canScroll, children } = this.state;
+		const { noBackgroundOpacity, containerStyle,onPressCloseButton, fullWidth, closeRootStyle, closeIconStyle } = this.props;
+
+		const backgroundColor = noBackgroundOpacity ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.5)';
 
 		return showComponent ? (
 			<Animated.View
 				style={[
 					SwipeablePanelStyles.background,
-					{ opacity, backgroundColor: noBackgroundOpacity ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.5)' }
+					{ opacity, backgroundColor }
 				]}
 			>
 				<Animated.View
 					style={[
 						SwipeablePanelStyles.container,
-						{ width: this.props.fullWidth ? FULL_WIDTH : FULL_WIDTH - 50 },
+						{ width: fullWidth ? FULL_WIDTH : FULL_WIDTH - 50 },
 						{ transform: this.pan.getTranslateTransform() },
 						containerStyle,
 					]}
 					{...this._panResponder.panHandlers}
 				>
 					<Bar />
-					{this.props.onPressCloseButton && <Close onPress={this.onPressCloseButton} />}
-					<ScrollView contentContainerStyle={{ width: '100%' }}>
-						{this.state.canScroll ? (
+					{
+						onPressCloseButton &&
+						<Close rootStyle={closeRootStyle} iconStyle={closeIconStyle} onPress={this.onPressCloseButton} />
+					}
+					<ScrollView contentContainerStyle={SwipeablePanelStyles.scrollViewContentContainerStyle}>
+						{canScroll ? (
 							<TouchableHighlight>
-								<React.Fragment>{this.props.children}</React.Fragment>
+								<React.Fragment>{children}</React.Fragment>
 							</TouchableHighlight>
 						) : (
-							this.props.children
+							children
 						)}
 					</ScrollView>
 				</Animated.View>
@@ -230,5 +232,8 @@ const SwipeablePanelStyles = StyleSheet.create({
 		shadowRadius: 1.0,
 		elevation: 1,
 		zIndex: 2
-	}
+	},
+	scrollViewContentContainerStyle: {
+		width: '100%',
+	},
 });
