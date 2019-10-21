@@ -163,39 +163,34 @@ export default class SwipeablePanel extends React.Component {
 	};
 
 	render() {
-		const { showComponent, opacity, canScroll, children } = this.state;
-		const { noBackgroundOpacity, containerStyle,onPressCloseButton, fullWidth, closeRootStyle, closeIconStyle } = this.props;
-
-		const backgroundColor = noBackgroundOpacity ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.5)';
+		const { showComponent, opacity } = this.state;
+		const { noBackgroundOpacity, containerStyle, closeRootStyle, closeIconStyle } = this.props;
 
 		return showComponent ? (
 			<Animated.View
 				style={[
 					SwipeablePanelStyles.background,
-					{ opacity, backgroundColor }
+					{ opacity, backgroundColor: noBackgroundOpacity ? 'rgba(0,0,0,0)' : 'rgba(0,0,0,0.5)' }
 				]}
 			>
 				<Animated.View
 					style={[
 						SwipeablePanelStyles.container,
-						{ width: fullWidth ? FULL_WIDTH : FULL_WIDTH - 50 },
+						{ width: this.props.fullWidth ? FULL_WIDTH : FULL_WIDTH - 50 },
 						{ transform: this.pan.getTranslateTransform() },
 						containerStyle,
 					]}
 					{...this._panResponder.panHandlers}
 				>
 					<Bar />
-					{
-						onPressCloseButton &&
-						<Close rootStyle={closeRootStyle} iconStyle={closeIconStyle} onPress={this.onPressCloseButton} />
-					}
-					<ScrollView contentContainerStyle={SwipeablePanelStyles.scrollViewContentContainerStyle}>
-						{canScroll ? (
+					{this.props.onPressCloseButton && <Close rootStyle={closeRootStyle} iconStyle={closeIconStyle} onPress={this.onPressCloseButton} />}
+					<ScrollView contentContainerStyle={{ width: '100%' }}>
+						{this.state.canScroll ? (
 							<TouchableHighlight>
-								<React.Fragment>{children}</React.Fragment>
+								<React.Fragment>{this.props.children}</React.Fragment>
 							</TouchableHighlight>
 						) : (
-							children
+							this.props.children
 						)}
 					</ScrollView>
 				</Animated.View>
