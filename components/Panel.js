@@ -15,7 +15,12 @@ export default class SwipeablePanel extends React.Component {
 		onClose: PropTypes.func,
 		fullWidth: PropTypes.bool,
 		onPressCloseButton: PropTypes.func,
-		noBackgroundOpacity: PropTypes.bool
+		noBackgroundOpacity: PropTypes.bool,
+		containerStyle: PropTypes.object,
+	};
+
+	static defaultProps = {
+		containerStyle: {},
 	};
 
 	constructor(props) {
@@ -162,7 +167,7 @@ export default class SwipeablePanel extends React.Component {
 
 	render() {
 		const { showComponent, opacity } = this.state;
-		const { noBackgroundOpacity } = this.props;
+		const { noBackgroundOpacity, containerStyle } = this.props;
 
 		return showComponent ? (
 			<Animated.View
@@ -175,7 +180,8 @@ export default class SwipeablePanel extends React.Component {
 					style={[
 						SwipeablePanelStyles.container,
 						{ width: this.props.fullWidth ? FULL_WIDTH : FULL_WIDTH - 50 },
-						{ transform: this.pan.getTranslateTransform() }
+						{ transform: this.pan.getTranslateTransform() },
+						containerStyle,
 					]}
 					{...this._panResponder.panHandlers}
 				>
