@@ -198,7 +198,7 @@ class SwipeablePanel extends Component {
 				>
 					<Bar />
 					{this.props.onPressCloseButton && <Close rootStyle={closeRootStyle} iconStyle={closeIconStyle} onPress={this.onPressCloseButton} />}
-					<ScrollView contentContainerStyle={{ width: '100%' }}>
+					<ScrollView contentContainerStyle={SwipeablePanelStyles.scrollViewContentContainerStyle}>
 						{this.state.canScroll ? (
 							<TouchableHighlight>
 								<React.Fragment>{this.props.children}</React.Fragment>
