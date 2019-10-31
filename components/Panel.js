@@ -52,12 +52,17 @@ class SwipeablePanel extends Component {
 				const distance = this.oldPan.y - this.pan.y._value;
 				const absDistance = Math.abs(distance);
 				const {status} = this.state;
+				const {onlyLarge} = this.props;
 
 				if (status === STATUS.LARGE) {
 					if (0 < absDistance && absDistance < 100) {
 						this._animateToLargePanel();
 					} else if (100 < absDistance && absDistance < CONTAINER_HEIGHT - 200) {
-						this._animateToSmallPanel();
+						if (onlyLarge) {
+							this._animateClosingAndOnCloseProp(true);
+						} else {
+							this._animateToSmallPanel();
+						}
 					} else if (CONTAINER_HEIGHT - 200 < absDistance) {
 						this._animateClosingAndOnCloseProp();
 					}
@@ -75,11 +80,11 @@ class SwipeablePanel extends Component {
 	}
 
 	componentDidUpdate(prevProps, prevState) {
-		const {isActive, openLarge} = this.props;
+		const {isActive, openLarge, onlyLarge} = this.props;
 
 		if (prevProps.isActive !== isActive) {
 			if (isActive) {
-				if (openLarge) {
+				if (openLarge || onlyLarge) {
 					this.openLarge();
 				} else {
 					this.openDetails();
@@ -217,6 +222,8 @@ SwipeablePanel.propTypes = {
 	style: PropTypes.object,
 	closeRootStyle: PropTypes.object,
 	closeIconStyle: PropTypes.object,
+	openLarge: PropTypes.bool,
+	onlyLarge: PropTypes.bool,
 };
 
 SwipeablePanel.defaultProps = {
@@ -225,6 +232,8 @@ SwipeablePanel.defaultProps = {
 	fullWidth: true,
 	closeRootStyle: {},
 	closeIconStyle: {},
+	openLarge: false,
+	onlyLarge: false,
 };
 
 const SwipeablePanelStyles = StyleSheet.create({
