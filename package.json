@@ -1,49 +1,51 @@
 {
-	"name": "rn-swipeable-panel",
-	"version": "1.0.14",
-	"description": "Swipeable panel for react native",
-	"main": "index.js",
-	"keywords": [
-		"react",
-		"react native",
-		"react-native-component",
-		"mobile",
-		"ios",
-		"android",
-		"swipeable",
-		"panel",
-		"swipeable-panel",
-		"swipe-up",
-		"swipe-down",
-		"bottom",
-		"bottom-panel",
-		"bottom-up",
-		"bottom-up-panel"
-	],
-	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/enesozturk/rn-swipeable-panel"
-	},
-	"bugs": {
-		"url": "https://github.com/enesozturk/rn-swipeable-panel/issues"
-	},
-	"homepage": "https://github.com/enesozturk/rn-swipeable-panel",
-	"files": [ "components" ],
-	"author": "Enes Ozturk",
-	"contributors": [
-		{
-			"name": "enesozturk",
-			"email": "enesozturk.d@gmail.com"
-		}
-	],
-	"license": "ISC",
-	"devDependencies": {
-		"metro-react-native-babel-preset": "^0.54.1"
-	},
-	"dependencies": {
-		"prop-types": "^15.7.2"
-	}
+  "name": "rn-swipeable-panel",
+  "version": "1.0.15",
+  "description": "Swipeable panel for react native",
+  "main": "index.js",
+  "keywords": [
+    "react",
+    "react native",
+    "react-native-component",
+    "mobile",
+    "ios",
+    "android",
+    "swipeable",
+    "panel",
+    "swipeable-panel",
+    "swipe-up",
+    "swipe-down",
+    "bottom",
+    "bottom-panel",
+    "bottom-up",
+    "bottom-up-panel"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/enesozturk/rn-swipeable-panel"
+  },
+  "bugs": {
+    "url": "https://github.com/enesozturk/rn-swipeable-panel/issues"
+  },
+  "homepage": "https://github.com/enesozturk/rn-swipeable-panel",
+  "files": [
+    "components"
+  ],
+  "author": "Enes Ozturk",
+  "contributors": [
+    {
+      "name": "enesozturk",
+      "email": "enesozturk.d@gmail.com"
+    }
+  ],
+  "license": "ISC",
+  "devDependencies": {
+    "metro-react-native-babel-preset": "^0.54.1"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2"
+  }
 }
