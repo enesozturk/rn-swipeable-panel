@@ -1,11 +1,11 @@
 import React from 'react';
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 
-export const Close = ({ onPress }) => {
+export const Close = ({ onPress, rootStyle, iconStyle }) => {
 	return (
-		<TouchableOpacity activeOpacity={1} onPress={onPress} style={CloseStyles.closeButton}>
-			<View style={[ CloseStyles.iconLine, { transform: [ { rotateZ: '45deg' } ] } ]} />
-			<View style={[ CloseStyles.iconLine, { transform: [ { rotateZ: '135deg' } ] } ]} />
+		<TouchableOpacity activeOpacity={1} onPress={onPress} style={[CloseStyles.closeButton, rootStyle]}>
+			<View style={[ CloseStyles.iconLine, iconStyle, { transform: [ { rotateZ: '45deg' } ] } ]} />
+			<View style={[ CloseStyles.iconLine, iconStyle, { transform: [ { rotateZ: '135deg' } ] } ]} />
 		</TouchableOpacity>
 	);
 };

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { StyleSheet, ScrollView, TouchableHighlight, Animated, Dimensions, PanResponder, Easing } from 'react-native';
 import { Bar } from './Bar';
 import { Close } from './Close';
@@ -9,22 +9,20 @@ const FULL_HEIGHT = Dimensions.get('window').height;
 const FULL_WIDTH = Dimensions.get('window').width;
 const CONTAINER_HEIGHT = FULL_HEIGHT - 100;
 
-export default class SwipeablePanel extends React.Component {
-	static propTypes = {
-		isActive: PropTypes.bool.isRequired,
-		onClose: PropTypes.func,
-		fullWidth: PropTypes.bool,
-		onPressCloseButton: PropTypes.func,
-		noBackgroundOpacity: PropTypes.bool
-	};
+const STATUS = {
+	CLOSED: 0,
+	SMALL: 1,
+	LARGE: 2,
+};
 
+class SwipeablePanel extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			showComponent: false,
 			opacity: new Animated.Value(0),
 			canScroll: false,
-			status: 0 // {0: close, 1: small, 2: large}
+			status: STATUS.CLOSED,
 		};
 		this.pan = new Animated.ValueXY({ x: 0, y: FULL_HEIGHT });
 		this.oldPan = { x: 0, y: 0 };
@@ -32,41 +30,68 @@ export default class SwipeablePanel extends React.Component {
 		this._panResponder = PanResponder.create({
 			onStartShouldSetPanResponder: (evt, gestureState) => true,
 			onPanResponderGrant: (evt, gestureState) => {
-				if (this.state.status == 1) this.pan.setOffset({ x: this.pan.x._value, y: FULL_HEIGHT - 400 });
-				else if (this.state.status == 2) this.pan.setOffset({ x: this.pan.x._value, y: 0 });
+				const {status} = this.state;
+
+				if (status === STATUS.SMALL) {
+					this.pan.setOffset({ x: this.pan.x._value, y: FULL_HEIGHT - 400 });
+				}	else if (status === STATUS.LARGE) {
+					this.pan.setOffset({ x: this.pan.x._value, y: 0 });
+				}
+
 				this.pan.setValue({ x: 0, y: 0 });
 			},
 			onPanResponderMove: (evt, gestureState) => {
 				const currentTop = this.pan.y._offset + gestureState.dy;
-				if (currentTop > 0) this.pan.setValue({ x: 0, y: gestureState.dy });
+				if (currentTop > 0) {
+					this.pan.setValue({ x: 0, y: gestureState.dy });
+				}
 			},
 			onPanResponderRelease: (evt, { vx, vy }) => {
 				this.pan.flattenOffset();
 
 				const distance = this.oldPan.y - this.pan.y._value;
 				const absDistance = Math.abs(distance);
+				const {status} = this.state;
+				const {onlyLarge} = this.props;
 
-				if (this.state.status == 2) {
-					if (0 < absDistance && absDistance < 100) this._animateToLargePanel();
-					else if (100 < absDistance && absDistance < CONTAINER_HEIGHT - 200) this._animateToSmallPanel();
-					else if (CONTAINER_HEIGHT - 200 < absDistance) this._animateClosingAndOnCloseProp();
+				if (status === STATUS.LARGE) {
+					if (0 < absDistance && absDistance < 100) {
+						this._animateToLargePanel();
+					} else if (100 < absDistance && absDistance < CONTAINER_HEIGHT - 200) {
+						if (onlyLarge) {
+							this._animateClosingAndOnCloseProp(true);
+						} else {
+							this._animateToSmallPanel();
+						}
+					} else if (CONTAINER_HEIGHT - 200 < absDistance) {
+						this._animateClosingAndOnCloseProp();
+					}
 				} else {
-					if (distance < -100) this._animateClosingAndOnCloseProp(false);
-					else if (distance > 0 && distance > 50) this._animateToLargePanel();
-					else this._animateToSmallPanel();
+					if (distance < -100) {
+						this._animateClosingAndOnCloseProp(false);
+					} else if (distance > 0 && distance > 50) {
+						this._animateToLargePanel();
+					} else {
+						this._animateToSmallPanel();
+					}
 				}
 			}
 		});
 	}
 
-	componentDidMount = () => {};
-
 	componentDidUpdate(prevProps, prevState) {
-		if (prevProps.isActive != this.props.isActive) {
-			if (this.props.isActive) {
-				if (this.props.openLarge) this.openLarge();
-				else this.openDetails();
-			} else this.closeDetails(true);
+		const {isActive, openLarge, onlyLarge} = this.props;
+
+		if (prevProps.isActive !== isActive) {
+			if (isActive) {
+				if (openLarge || onlyLarge) {
+					this.openLarge();
+				} else {
+					this.openDetails();
+				}
+			} else {
+				this.closeDetails(true);
+			}
 		}
 	}
 
@@ -75,94 +100,85 @@ export default class SwipeablePanel extends React.Component {
 	};
 
 	_animateToLargePanel = () => {
-		Animated.spring(this.pan, {
-			toValue: { x: 0, y: 0 },
-			easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
-			duration: 200,
-			useNativeDriver: true
-		}).start();
-		this.setState({ canScroll: true, status: 2 });
+		this._animateSpringPan(0, 0, 200);
+		this.setState({ canScroll: true, status: STATUS.LARGE });
 		this.oldPan = { x: 0, y: 0 };
 	};
 
 	_animateToSmallPanel = () => {
-		Animated.spring(this.pan, {
-			toValue: { x: 0, y: FULL_HEIGHT - 400 },
-			easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
-			duration: 300,
-			useNativeDriver: true
-		}).start();
-		this.setState({ status: 1 });
+		this._animateSpringPan(0, FULL_HEIGHT - 400, 300);
+		this.setState({ status: STATUS.SMALL });
 		this.oldPan = { x: 0, y: FULL_HEIGHT - 400 };
 	};
 
 	openLarge = () => {
-		this.setState({ showComponent: true, status: 2, canScroll: true });
+		this.setState({ showComponent: true, status: STATUS.LARGE, canScroll: true });
 		Animated.parallel([
-			Animated.timing(this.pan, {
-				toValue: { x: 0, y: 0 },
-				easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
-				duration: 500,
-				useNativeDriver: true
-			}).start(),
-			Animated.timing(this.state.opacity, {
-				toValue: 1,
-				easing: Easing.bezier(0.5, 0.5, 0.5, 0.5),
-				duration: 300,
-				useNativeDriver: true
-			}).start()
+			this._animateTimingPan(),
+			this._animateTimingOpacity(1, 300),
 		]);
 		this.oldPan = { x: 0, y: 0 };
 	};
 
 	openDetails = () => {
-		this.setState({ showComponent: true, status: 1 });
+		this.setState({ showComponent: true, status: STATUS.SMALL });
 		Animated.parallel([
-			Animated.timing(this.pan, {
-				toValue: { x: 0, y: FULL_HEIGHT - 400 },
-				easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
-				duration: 500,
-				useNativeDriver: true
-			}).start(),
-			Animated.timing(this.state.opacity, {
-				toValue: 1,
-				easing: Easing.bezier(0.5, 0.5, 0.5, 0.5),
-				duration: 300,
-				useNativeDriver: true
-			}).start()
+			this._animateTimingPan(0, FULL_HEIGHT - 400),
+			this._animateTimingOpacity(1, 300),
 		]);
 		this.oldPan = { x: 0, y: FULL_HEIGHT - 400 };
 	};
 
 	closeDetails = (isCloseButtonPress) => {
+		const {status} = this.state;
+		const duration = status === STATUS.LARGE ? 500 : 300;
+		const easing = isCloseButtonPress ? Easing.bezier(0.98, -0.11, 0.44, 0.59) : Easing.linear;
+
 		Animated.parallel([
-			Animated.timing(this.pan, {
-				toValue: { x: 0, y: FULL_HEIGHT },
-				easing: isCloseButtonPress ? Easing.bezier(0.98, -0.11, 0.44, 0.59) : Easing.linear,
-				duration: this.state.status == 2 ? 500 : 300,
-				useNativeDriver: true
-			}).start(),
-			Animated.timing(this.state.opacity, {
-				toValue: this.state.status == 1 ? 0 : 1,
-				easing: Easing.bezier(0.5, 0.5, 0.5, 0.5),
-				duration: this.state.status == 2 ? 500 : 300,
-				useNativeDriver: true
-			}).start()
+			this._animateTimingPan(0, FULL_HEIGHT, duration, easing),
+			this._animateTimingOpacity(status === STATUS.SMALL ? 0 : 1, status === STATUS.LARGE ? 500 : 300),
 		]);
 
 		setTimeout(() => {
-			this.setState({ showComponent: false, canScroll: false, status: 0 });
-			if (this.props.onClose != 'undefined' && this.props.onClose) this.props.onClose();
-		}, this.state.status == 2 ? 450 : 250);
+			this.setState({ showComponent: false, canScroll: false, status: STATUS.CLOSED });
+			this.props.onClose();
+		}, status === STATUS.LARGE ? 450 : 250);
 	};
 
 	onPressCloseButton = () => {
 		this._animateClosingAndOnCloseProp(true);
 	};
 
+	_animateSpringPan = (x, y, duration) => {
+		return Animated.spring(this.pan, {
+			toValue: { x , y },
+			easing: Easing.bezier(0.05, 1.35, 0.2, 0.95),
+			duration: duration,
+			useNativeDriver: true
+		}).start();
+	};
+
+	_animateTimingOpacity = (toValue, duration) => {
+		return Animated.timing(this.state.opacity, {
+			toValue,
+			easing: Easing.bezier(0.5, 0.5, 0.5, 0.5),
+			duration,
+			useNativeDriver: true
+		}).start();
+	};
+
+	_animateTimingPan = (x = 0, y = 0, duration = 500, easing = Easing.bezier(0.05, 1.35, 0.2, 0.95)) => {
+		return Animated.timing(this.pan, {
+			toValue: { x, y },
+			easing,
+			duration,
+			useNativeDriver: true
+		}).start();
+	};
+
 	render() {
 		const { showComponent, opacity } = this.state;
-		const { noBackgroundOpacity } = this.props;
+		const { noBackgroundOpacity, style, closeRootStyle, closeIconStyle } = this.props;
 
 		return showComponent ? (
 			<Animated.View
@@ -175,13 +191,14 @@ export default class SwipeablePanel extends React.Component {
 					style={[
 						SwipeablePanelStyles.container,
 						{ width: this.props.fullWidth ? FULL_WIDTH : FULL_WIDTH - 50 },
-						{ transform: this.pan.getTranslateTransform() }
+						{ transform: this.pan.getTranslateTransform() },
+						style,
 					]}
 					{...this._panResponder.panHandlers}
 				>
 					<Bar />
-					{this.props.onPressCloseButton && <Close onPress={this.onPressCloseButton} />}
-					<ScrollView contentContainerStyle={{ width: '100%' }}>
+					{this.props.onPressCloseButton && <Close rootStyle={closeRootStyle} iconStyle={closeIconStyle} onPress={this.onPressCloseButton} />}
+					<ScrollView contentContainerStyle={SwipeablePanelStyles.scrollViewContentContainerStyle}>
 						{this.state.canScroll ? (
 							<TouchableHighlight>
 								<React.Fragment>{this.props.children}</React.Fragment>
@@ -195,6 +212,29 @@ export default class SwipeablePanel extends React.Component {
 		) : null;
 	}
 }
+
+SwipeablePanel.propTypes = {
+	isActive: PropTypes.bool.isRequired,
+	onClose: PropTypes.func,
+	fullWidth: PropTypes.bool,
+	onPressCloseButton: PropTypes.func,
+	noBackgroundOpacity: PropTypes.bool,
+	style: PropTypes.object,
+	closeRootStyle: PropTypes.object,
+	closeIconStyle: PropTypes.object,
+	openLarge: PropTypes.bool,
+	onlyLarge: PropTypes.bool,
+};
+
+SwipeablePanel.defaultProps = {
+	style: {},
+	onClose: () => {},
+	fullWidth: true,
+	closeRootStyle: {},
+	closeIconStyle: {},
+	openLarge: false,
+	onlyLarge: false,
+};
 
 const SwipeablePanelStyles = StyleSheet.create({
 	background: {
@@ -224,5 +264,10 @@ const SwipeablePanelStyles = StyleSheet.create({
 		shadowRadius: 1.0,
 		elevation: 1,
 		zIndex: 2
-	}
+	},
+	scrollViewContentContainerStyle: {
+		width: '100%',
+	},
 });
+
+export default SwipeablePanel;
