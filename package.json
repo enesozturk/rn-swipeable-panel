@@ -41,9 +41,6 @@
       "email": "enesozturk.d@gmail.com"
     }
   ],
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/rn-swipeable-panel"
-  },
   "license": "ISC",
   "devDependencies": {
     "metro-react-native-babel-preset": "^0.54.1"
