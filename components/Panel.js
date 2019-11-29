@@ -2,7 +2,9 @@ import React, { Component } from "react";
 import {
   StyleSheet,
   ScrollView,
+  View,
   TouchableHighlight,
+  TouchableWithoutFeedback,
   Animated,
   Dimensions,
   PanResponder,
@@ -263,6 +265,16 @@ class SwipeablePanel extends Component {
           }
         ]}
       >
+        {this.props.closeOnTouchOutside && (
+          <TouchableWithoutFeedback onPress={this.onPressCloseButton}>
+            <View
+              style={[
+                SwipeablePanelStyles.background,
+                { backgroundColor: "rgba(0,0,0,0)" }
+              ]}
+            />
+          </TouchableWithoutFeedback>
+        )}
         <Animated.View
           style={[
             SwipeablePanelStyles.container,
@@ -281,6 +293,12 @@ class SwipeablePanel extends Component {
             />
           )}
           <ScrollView
+            onTouchStart={() => {
+              return false;
+            }}
+            onTouchEnd={() => {
+              return false;
+            }}
             contentContainerStyle={
               SwipeablePanelStyles.scrollViewContentContainerStyle
             }
@@ -310,7 +328,8 @@ SwipeablePanel.propTypes = {
   closeIconStyle: PropTypes.object,
   openLarge: PropTypes.bool,
   onlyLarge: PropTypes.bool,
-  bounceAnimation: PropTypes.bool
+  bounceAnimation: PropTypes.bool,
+  closeOnTouchOutside: PropTypes.bool
 };
 
 SwipeablePanel.defaultProps = {
@@ -321,7 +340,8 @@ SwipeablePanel.defaultProps = {
   closeIconStyle: {},
   openLarge: false,
   onlyLarge: false,
-  bounceAnimation: false
+  bounceAnimation: false,
+  closeOnTouchOutside: false
 };
 
 const SwipeablePanelStyles = StyleSheet.create({

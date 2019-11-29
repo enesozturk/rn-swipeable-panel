@@ -105,6 +105,7 @@ export default class App extends Component {
           openConfigurationsPanel={this.openConfigurationsPanel}
         />
         <SwipeablePanel
+          closeOnTouchOutside
           bounceAnimation
           fullWidth={panelState.fullWidth}
           noBackgroundOpacity={panelState.noBackgroundOpacity}
