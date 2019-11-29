@@ -96,6 +96,7 @@ export default class App extends Component {
 | **style**               | `Object`   | Use this prop to override panel style                                                                         | `{}`    |
 | **closeRootStyle**      | `Object`   | Use this prop to override close button background style                                                       | `{}`    |
 | **closeIconStyle**      | `Object`   | Use this prop to override close button icon style                                                             | `{}`    |
+| **bounceAnimation**     | `bool`     | Set true if you want to bounce panel transition                                                               | `false` |
 
 #### ⭐️ Show Your Support
 

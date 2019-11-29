@@ -1,13 +1,13 @@
-import React from 'react';
+import React from "react";
 
-import { Title } from '../About/components/Title';
-import { Details } from '../About/components/Details';
+import { Title } from "./components/Title";
+import { Details } from "./components/Details";
 
 export const About = ({}) => {
-	return (
-		<React.Fragment>
-			<Title title="About" />
-			<Details />
-		</React.Fragment>
-	);
+  return (
+    <React.Fragment>
+      <Title title="About" />
+      <Details />
+    </React.Fragment>
+  );
 };
