@@ -52,15 +52,10 @@ class SwipeablePanel extends Component {
         this.state.pan.setValue({ x: 0, y: 0 });
       },
       onPanResponderMove: (evt, gestureState) => {
-        if (
-          this.state.pan.y._offset + Math.abs(gestureState.dy) <
-          PANEL_HEIGHT
-        ) {
-          this.state.pan.setValue({
-            x: 0,
-            y: gestureState.dy
-          });
-        }
+        this.state.pan.setValue({
+          x: 0,
+          y: gestureState.dy
+        });
       },
       onPanResponderRelease: (evt, gestureState) => {
         const { onlyLarge } = this.props;

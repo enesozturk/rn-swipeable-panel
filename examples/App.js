@@ -42,7 +42,7 @@ export default class App extends Component {
   openAboutPanel = () => {
     this.setState({
       isActive: true,
-      openLarge: false,
+      openLarge: true,
       fullWidth: true,
       showCloseButton: true,
       content: () => <About />
@@ -90,34 +90,23 @@ export default class App extends Component {
     return (
       <SafeAreaView style={styles.container}>
         <Header title={"Examples"} />
-        {/* {button == null && (
-          <TouchableOpacity
-            onPress={() => this.setState({ isActive: true })}
-            style={{ width: 50, height: 50, backgroundColor: "red" }}
-          ></TouchableOpacity>
-        )} */}
         <List
           openDefaultPanel={this.openDefaultPanel}
           openSettingsPanel={this.openSettingsPanel}
           openAboutPanel={this.openAboutPanel}
           openConfigurationsPanel={this.openConfigurationsPanel}
         />
-
         <SwipeablePanel
           fullWidth
-          openLarge
-          onlyLarge
+          openLarge={openLarge}
           showCloseButton
           isActive={isActive}
+          closeOnTouchOutside
           onClose={() => {
             this.setState({ isActive: false });
           }}
-          closeOnTouchOutside
         >
-          <TouchableOpacity
-            onPress={() => this.setState({ button: "x", isActive: false })}
-            style={{ width: 50, height: 50, backgroundColor: "red" }}
-          ></TouchableOpacity>
+          {this.state.content()}
         </SwipeablePanel>
       </SafeAreaView>
     );
@@ -129,7 +118,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    backgroundColor: "#EEF4F6"
+    backgroundColor: "#82B7E9"
   },
   welcome: {
     fontSize: 20,

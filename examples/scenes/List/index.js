@@ -4,7 +4,10 @@ import { View, FlatList, Text } from "react-native";
 import { Styles } from "./styles";
 import { ListItem } from "./components/ListItem";
 
-const ItemList = [{ id: 1, name: "About", open: "about" }];
+const ItemList = [
+  { id: 1, name: "About", open: "about" },
+  { id: 2, name: "Settings", open: "settings" }
+];
 
 export default class List extends React.Component {
   constructor(props) {
