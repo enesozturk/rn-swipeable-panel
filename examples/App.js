@@ -60,6 +60,18 @@ export default class App extends Component {
     });
   };
 
+  openConfigurationsPanel = () => {
+    this.setState({
+      isActive: true,
+      openLarge: false,
+      fullWidth: false,
+      showCloseButton: false,
+      content: () => (
+        <Configurations state={this.state} changeState={this.changeState} />
+      )
+    });
+  };
+
   changeState = state => {
     this.setState({ ...state });
   };
@@ -71,24 +83,26 @@ export default class App extends Component {
   closePanel = () => {
     this.setState({
       isActive: false,
-      bounceAnimation: false
+      fullWidth: false,
+      openLarge: false,
+      showCloseButton: false,
+      noBackgroundOpacity: false,
+      closeOnTouchOutside: false
     });
   };
 
   render() {
     const {
-      button,
       isActive,
       showCloseButton,
       closeOnTouchOutside,
-      bounceAnimation,
       fullWidth,
       noBackgroundOpacity,
       openLarge
     } = this.state;
 
     return (
-      <SafeAreaView style={styles.container}>
+      <SafeAreaView style={Styles.container}>
         <Header title={"Examples"} />
         <List
           openDefaultPanel={this.openDefaultPanel}
@@ -97,11 +111,12 @@ export default class App extends Component {
           openConfigurationsPanel={this.openConfigurationsPanel}
         />
         <SwipeablePanel
-          fullWidth
+          fullWidth={fullWidth}
           openLarge={openLarge}
-          showCloseButton
+          showCloseButton={showCloseButton}
+          noBackgroundOpacity={noBackgroundOpacity}
           isActive={isActive}
-          closeOnTouchOutside
+          closeOnTouchOutside={closeOnTouchOutside}
           onClose={() => {
             this.setState({ isActive: false });
           }}
@@ -113,21 +128,11 @@ export default class App extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const Styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#82B7E9"
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: "center",
-    margin: 10
-  },
-  instructions: {
-    textAlign: "center",
-    color: "#333333",
-    marginBottom: 5
   }
 });

@@ -6,7 +6,8 @@ import { ListItem } from "./components/ListItem";
 
 const ItemList = [
   { id: 1, name: "About", open: "about" },
-  { id: 2, name: "Settings", open: "settings" }
+  { id: 2, name: "Settings", open: "settings" },
+  { id: 3, name: "Configurations", open: "configurations" }
 ];
 
 export default class List extends React.Component {

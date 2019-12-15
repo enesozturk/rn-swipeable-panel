@@ -10,7 +10,6 @@ import {
   PanResponder,
   Easing
 } from "react-native";
-const { cond, eq, add, set, Value, event } = Animated;
 
 import { Bar } from "./Bar";
 import { Close } from "./Close";
