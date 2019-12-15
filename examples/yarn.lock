@@ -5311,10 +5311,10 @@ rimraf@~2.2.6:
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
   integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
 
-rn-swipeable-panel@^1.0.17:
-  version "1.0.17"
-  resolved "https://registry.yarnpkg.com/rn-swipeable-panel/-/rn-swipeable-panel-1.0.17.tgz#712fc9e10649f40be3245368f41cdde52478c3a9"
-  integrity sha512-Uc3udgR4LTlTerSywV6ypHjhyGD9WP3M6F+42cDUbGKRpN/b6HoqhLJE42Hb0M7ZLpIff3RQUWjEVWXWQ8iqiQ==
+rn-swipeable-panel@^1.0.18:
+  version "1.0.18"
+  resolved "https://registry.yarnpkg.com/rn-swipeable-panel/-/rn-swipeable-panel-1.0.18.tgz#2862db5bab322f7c7fd4f1ea58ba786e2c61c38c"
+  integrity sha512-4n1kEPbAeUC20PFPQPT+gOt4izQ6aHUn3bzBfwpl+X4BzMzElh196uvMe6JnrjU1AJ0bVNbZdseYaAeH/ozeMA==
   dependencies:
     prop-types "^15.7.2"
 
