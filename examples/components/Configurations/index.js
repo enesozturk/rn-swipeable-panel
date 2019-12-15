@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, Switch } from "react-native";
+import { buildFailureTestResult } from "@jest/test-result";
 
 export const Configurations = ({ state, changeState }) => {
   return (
@@ -20,7 +21,7 @@ export const Configurations = ({ state, changeState }) => {
       </View>
       <View style={Styles.configurationItem}>
         <Text>Is Open</Text>
-        <Switch value={state.isOpen} disabled />
+        <Switch value={state.isActive} disabled />
       </View>
       <View style={Styles.configurationItem}>
         <Text>Full Width</Text>
@@ -32,8 +33,13 @@ export const Configurations = ({ state, changeState }) => {
       <View style={Styles.configurationItem}>
         <Text>Close Button</Text>
         <Switch
-          value={state.closeButton}
-          onValueChange={value => changeState({ ...state, closeButton: value })}
+          value={state.showCloseButton}
+          onValueChange={value =>
+            changeState({
+              ...state,
+              showCloseButton: value
+            })
+          }
         />
       </View>
       <View style={Styles.configurationItem}>
@@ -42,6 +48,24 @@ export const Configurations = ({ state, changeState }) => {
           value={state.noBackgroundOpacity}
           onValueChange={value =>
             changeState({ ...state, noBackgroundOpacity: value })
+          }
+        />
+      </View>
+      <View style={Styles.configurationItem}>
+        <Text>Bounce Animation</Text>
+        <Switch
+          value={state.bounceAnimation}
+          onValueChange={value =>
+            changeState({ ...state, bounceAnimation: value })
+          }
+        />
+      </View>
+      <View style={Styles.configurationItem}>
+        <Text>Close on touch outside</Text>
+        <Switch
+          value={state.closeOnTouchOutside}
+          onValueChange={value =>
+            changeState({ ...state, closeOnTouchOutside: value })
           }
         />
       </View>
