@@ -4,7 +4,7 @@ import { StyleSheet, TouchableOpacity, View } from "react-native";
 export const Close = ({ onPress, rootStyle, iconStyle }) => {
   return (
     <TouchableOpacity
-      activeOpacity={1}
+      activeOpacity={0.5}
       onPress={onPress}
       style={[CloseStyles.closeButton, rootStyle]}
     >

@@ -53,7 +53,7 @@ export default class App extends Component {
     this.setState({
       isActive: true,
       openLarge: false,
-      fullWidth: false,
+      fullWidth: true,
       bounceAnimation: true,
       showCloseButton: true,
       content: () => <Settings />

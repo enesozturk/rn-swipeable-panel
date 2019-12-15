@@ -7,8 +7,7 @@ import {
   TouchableWithoutFeedback,
   Animated,
   Dimensions,
-  PanResponder,
-  Easing
+  PanResponder
 } from "react-native";
 
 import { Bar } from "./Bar";

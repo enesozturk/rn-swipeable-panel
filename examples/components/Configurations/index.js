@@ -1,6 +1,5 @@
 import React from "react";
 import { StyleSheet, View, Text, Switch } from "react-native";
-import { buildFailureTestResult } from "@jest/test-result";
 
 export const Configurations = ({ state, changeState }) => {
   return (
@@ -48,15 +47,6 @@ export const Configurations = ({ state, changeState }) => {
           value={state.noBackgroundOpacity}
           onValueChange={value =>
             changeState({ ...state, noBackgroundOpacity: value })
-          }
-        />
-      </View>
-      <View style={Styles.configurationItem}>
-        <Text>Bounce Animation</Text>
-        <Switch
-          value={state.bounceAnimation}
-          onValueChange={value =>
-            changeState({ ...state, bounceAnimation: value })
           }
         />
       </View>
