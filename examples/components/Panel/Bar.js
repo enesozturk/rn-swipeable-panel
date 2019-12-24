@@ -17,7 +17,7 @@ const BarStyles = StyleSheet.create({
   },
   bar: {
     width: "40%",
-    height: 6,
+    height: 5,
     borderRadius: 5,
     marginTop: 10,
     marginBottom: 10,
