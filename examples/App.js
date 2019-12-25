@@ -6,21 +6,21 @@
  * @flow
  */
 
-import React, { Component } from "react";
-import { StyleSheet, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-navigation";
+import React, {Component} from 'react';
+import {StyleSheet, TouchableOpacity} from 'react-native';
+import {SafeAreaView} from 'react-navigation';
 
-import { Header } from "./components/Header";
-import List from "./scenes/List";
+import {Header} from './components/Header';
+import List from './scenes/List';
 
-import { Settings } from "./components/Settings";
-import { About } from "./components/About";
-import { Configurations } from "./components/Configurations";
+import {Settings} from './components/Settings';
+import {About} from './components/About';
+import {Configurations} from './components/Configurations';
 
-import SwipeablePanel from "rn-swipeable-panel";
+// import SwipeablePanel from "rn-swipeable-panel";
 
 // For developement I use
-//import SwipeablePanel from "./components/Panel/Panel";
+import SwipeablePanel from './components/Panel/Panel';
 
 export default class App extends Component {
   constructor(props) {
@@ -35,7 +35,7 @@ export default class App extends Component {
       closeButton: null,
       bounceAnimation: false,
       closeOnTouchOutside: false,
-      button: null
+      button: null,
     };
   }
 
@@ -45,7 +45,8 @@ export default class App extends Component {
       openLarge: true,
       fullWidth: true,
       showCloseButton: true,
-      content: () => <About />
+      noBar: false,
+      content: () => <About />,
     });
   };
 
@@ -54,9 +55,9 @@ export default class App extends Component {
       isActive: true,
       openLarge: false,
       fullWidth: true,
-      bounceAnimation: true,
       showCloseButton: true,
-      content: () => <Settings />
+      noBar: true,
+      content: () => <Settings />,
     });
   };
 
@@ -66,18 +67,19 @@ export default class App extends Component {
       openLarge: false,
       fullWidth: false,
       showCloseButton: false,
+      noBar: false,
       content: () => (
         <Configurations state={this.state} changeState={this.changeState} />
-      )
+      ),
     });
   };
 
   changeState = state => {
-    this.setState({ ...state });
+    this.setState({...state});
   };
 
   openDefaultPanel = () => {
-    this.setState({ isActive: true, openLarge: false, content: () => null });
+    this.setState({isActive: true, openLarge: false, content: () => null});
   };
 
   closePanel = () => {
@@ -87,7 +89,8 @@ export default class App extends Component {
       openLarge: false,
       showCloseButton: false,
       noBackgroundOpacity: false,
-      closeOnTouchOutside: false
+      closeOnTouchOutside: false,
+      noBar: false,
     });
   };
 
@@ -98,12 +101,13 @@ export default class App extends Component {
       closeOnTouchOutside,
       fullWidth,
       noBackgroundOpacity,
-      openLarge
+      openLarge,
+      noBar,
     } = this.state;
 
     return (
       <SafeAreaView style={Styles.container}>
-        <Header title={"Examples"} />
+        <Header title={'Examples'} />
         <List
           openDefaultPanel={this.openDefaultPanel}
           openSettingsPanel={this.openSettingsPanel}
@@ -112,15 +116,15 @@ export default class App extends Component {
         />
         <SwipeablePanel
           fullWidth={fullWidth}
+          noBar={noBar}
           openLarge={openLarge}
           showCloseButton={showCloseButton}
           noBackgroundOpacity={noBackgroundOpacity}
           isActive={isActive}
           closeOnTouchOutside={closeOnTouchOutside}
           onClose={() => {
-            this.setState({ isActive: false });
-          }}
-        >
+            this.setState({isActive: false});
+          }}>
           {this.state.content()}
         </SwipeablePanel>
       </SafeAreaView>
@@ -131,8 +135,8 @@ export default class App extends Component {
 const Styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "#82B7E9"
-  }
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#82B7E9',
+  },
 });

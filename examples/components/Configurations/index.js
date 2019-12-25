@@ -1,22 +1,19 @@
-import React from "react";
-import { StyleSheet, View, Text, Switch } from "react-native";
+import React from 'react';
+import {StyleSheet, View, Text, Switch} from 'react-native';
 
-export const Configurations = ({ state, changeState }) => {
+export const Configurations = ({state, changeState}) => {
   return (
     <React.Fragment>
       <View
         style={[
           Styles.configurationItem,
           {
-            justifyContent: "center",
+            justifyContent: 'center',
             borderBottomWidth: 1,
-            borderBottomColor: "rgba(0,0,0,0.1)"
-          }
-        ]}
-      >
-        <Text style={[Styles.title, { fontWeight: "bold" }]}>
-          Configurations
-        </Text>
+            borderBottomColor: 'rgba(0,0,0,0.1)',
+          },
+        ]}>
+        <Text style={[Styles.title, {fontWeight: 'bold'}]}>Configurations</Text>
       </View>
       <View style={Styles.configurationItem}>
         <Text>Is Open</Text>
@@ -26,7 +23,7 @@ export const Configurations = ({ state, changeState }) => {
         <Text>Full Width</Text>
         <Switch
           value={state.fullWidth}
-          onValueChange={value => changeState({ ...state, fullWidth: value })}
+          onValueChange={value => changeState({...state, fullWidth: value})}
         />
       </View>
       <View style={Styles.configurationItem}>
@@ -36,7 +33,7 @@ export const Configurations = ({ state, changeState }) => {
           onValueChange={value =>
             changeState({
               ...state,
-              showCloseButton: value
+              showCloseButton: value,
             })
           }
         />
@@ -46,7 +43,7 @@ export const Configurations = ({ state, changeState }) => {
         <Switch
           value={state.noBackgroundOpacity}
           onValueChange={value =>
-            changeState({ ...state, noBackgroundOpacity: value })
+            changeState({...state, noBackgroundOpacity: value})
           }
         />
       </View>
@@ -55,7 +52,7 @@ export const Configurations = ({ state, changeState }) => {
         <Switch
           value={state.closeOnTouchOutside}
           onValueChange={value =>
-            changeState({ ...state, closeOnTouchOutside: value })
+            changeState({...state, closeOnTouchOutside: value})
           }
         />
       </View>
@@ -65,13 +62,13 @@ export const Configurations = ({ state, changeState }) => {
 
 export const Styles = StyleSheet.create({
   configurationItem: {
-    width: "100%",
+    width: '100%',
     marginBottom: 10,
     padding: 10,
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#fff"
-  }
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
 });
