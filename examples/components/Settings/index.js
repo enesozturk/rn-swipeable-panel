@@ -6,10 +6,10 @@ import {Seperator} from './components/Seperator';
 
 export const Settings = ({item, settingMethods}) => {
   return (
-    <React.Fragment>
+    <View>
       <SettingItem title={'Settings'} isHeader />
       <SettingItem title={'Add To Favorites'} item={item} />
       <SettingItem title={'Remove'} item={item} isLast isRed />
-    </React.Fragment>
+    </View>
   );
 };

@@ -45,7 +45,6 @@ export default class App extends Component {
       openLarge: true,
       fullWidth: true,
       showCloseButton: true,
-      noBar: false,
       content: () => <About />,
     });
   };
@@ -56,7 +55,6 @@ export default class App extends Component {
       openLarge: false,
       fullWidth: true,
       showCloseButton: true,
-      noBar: true,
       content: () => <Settings />,
     });
   };

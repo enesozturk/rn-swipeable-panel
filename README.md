@@ -96,6 +96,7 @@ export default class App extends Component {
 | **closeRootStyle**      | `Object`   | Use this prop to override close button background style  | `{}`    |
 | **closeIconStyle**      | `Object`   | Use this prop to override close button icon style        | `{}`    |
 | **closeOnTouchOutside** | `bool`     | Set true if you want to close panel by touching outside  | `false` |
+| **noBar**               | `bool`     | Set true if you want to remove gray bar                  | `false` |
 
 #### ⭐️ Show Your Support
 
