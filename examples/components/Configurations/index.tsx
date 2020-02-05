@@ -1,7 +1,12 @@
 import React from 'react';
 import {StyleSheet, View, Text, Switch} from 'react-native';
 
-export const Configurations = ({state, changeState}) => {
+type ConfigurationsProps = {
+  state: Object;
+  changeState: Function;
+};
+
+export const Configurations = ({state, changeState}: ConfigurationsProps) => {
   return (
     <React.Fragment>
       <View
@@ -13,7 +18,7 @@ export const Configurations = ({state, changeState}) => {
             borderBottomColor: 'rgba(0,0,0,0.1)',
           },
         ]}>
-        <Text style={[Styles.title, {fontWeight: 'bold'}]}>Configurations</Text>
+        <Text style={[{fontWeight: 'bold'}]}>Configurations</Text>
       </View>
       <View style={Styles.configurationItem}>
         <Text>Is Open</Text>

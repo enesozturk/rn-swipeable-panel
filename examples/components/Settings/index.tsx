@@ -4,12 +4,14 @@ import {View} from 'react-native';
 import {SettingItem} from './components/SettingItem';
 import {Seperator} from './components/Seperator';
 
-export const Settings = ({item, settingMethods}) => {
+type SettingsProps = {};
+
+export const Settings = ({}: SettingsProps) => {
   return (
     <View>
       <SettingItem title={'Settings'} isHeader />
-      <SettingItem title={'Add To Favorites'} item={item} />
-      <SettingItem title={'Remove'} item={item} isLast isRed />
+      <SettingItem title={'Add To Favorites'} />
+      <SettingItem title={'Remove'} isLast isRed />
     </View>
   );
 };

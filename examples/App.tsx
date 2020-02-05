@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet, TouchableOpacity} from 'react-native';
+import {StyleSheet} from 'react-native';
 import {SafeAreaView} from 'react-navigation';
 
 import {Header} from './components/Header';
@@ -22,8 +22,21 @@ import {Configurations} from './components/Configurations';
 // For developement I use
 import SwipeablePanel from './components/Panel/Panel';
 
-export default class App extends Component {
-  constructor(props) {
+type AppState = {
+  content: Function;
+  isActive: Boolean;
+  openLarge: Boolean;
+  onlyLarge: Boolean;
+  fullWidth: Boolean;
+  noBar: Boolean;
+  showCloseButton: Boolean;
+  noBackgroundOpacity: Boolean;
+  bounceAnimation: Boolean;
+  closeOnTouchOutside: Boolean;
+};
+
+export default class App extends Component<{}, AppState> {
+  constructor(props: {}) {
     super(props);
     this.state = {
       content: () => null,
@@ -32,10 +45,10 @@ export default class App extends Component {
       onlyLarge: false,
       fullWidth: false,
       noBackgroundOpacity: false,
-      closeButton: null,
       bounceAnimation: false,
       closeOnTouchOutside: false,
-      button: null,
+      noBar: false,
+      showCloseButton: false,
     };
   }
 
@@ -72,8 +85,8 @@ export default class App extends Component {
     });
   };
 
-  changeState = state => {
-    this.setState({...state});
+  changeState = (state: any) => {
+    this.setState(state);
   };
 
   openDefaultPanel = () => {

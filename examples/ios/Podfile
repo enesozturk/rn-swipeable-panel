@@ -34,6 +34,10 @@ target 'examples' do
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
 
+  pod 'SGActionView', :git => 'https://github.com/prscX/SGActionView.git'
+
+   	use_native_modules!
+  
   target 'examplesTests' do
     inherit! :search_paths
     # Pods for testing
