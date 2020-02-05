@@ -171,9 +171,7 @@ class SwipeablePanel extends Component {
           ]}
           {...this._panResponder.panHandlers}
         >
-          {!this.props.noBar && (
-            <Bar barStyle={barStyle}/>
-          )}
+          {!this.props.noBar && <Bar barStyle={barStyle} />}
           {this.props.showCloseButton && (
             <Close
               rootStyle={closeRootStyle}

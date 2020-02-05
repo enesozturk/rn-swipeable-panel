@@ -1,10 +1,10 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 
-export const Bar = ({barStyle}) => {
+export const Bar = ({ barStyle }) => {
   return (
     <View style={BarStyles.barContainer}>
-      <View style={[BarStyles.bar,barStyle]} />
+      <View style={[BarStyles.bar, barStyle]} />
     </View>
   );
 };
