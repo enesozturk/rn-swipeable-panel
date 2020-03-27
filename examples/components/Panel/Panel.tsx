@@ -115,12 +115,20 @@ class SwipeablePanel extends Component<
   }
 
   componentDidMount = () => {
+    const {isActive, openLarge, onlyLarge} = this.props;
+
     this.animatedValueY = 0;
     this.state.pan.y.addListener(
       (value: any) => (this.animatedValueY = value.value),
     );
 
-    this.setState({isActive: this.props.isActive});
+    this.setState({isActive});
+
+    if (isActive) {
+      this._animateTo(
+        openLarge ? STATUS.LARGE : onlyLarge ? STATUS.LARGE : STATUS.SMALL,
+      );
+    }
   };
 
   componentDidUpdate(
