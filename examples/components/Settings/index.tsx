@@ -8,10 +8,10 @@ type SettingsProps = {};
 
 export const Settings = ({}: SettingsProps) => {
   return (
-    <View>
+    <>
       <SettingItem title={'Settings'} isHeader />
       <SettingItem title={'Add To Favorites'} />
       <SettingItem title={'Remove'} isLast isRed />
-    </View>
+    </>
   );
 };

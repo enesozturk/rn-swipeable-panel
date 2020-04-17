@@ -34,6 +34,7 @@ type SwipeablePanelProps = {
   closeIconStyle?: Object;
   closeOnTouchOutside: Boolean;
   onlyLarge?: Boolean;
+  onlySmall?: Boolean;
   openLarge?: Boolean;
   noBar?: Boolean;
 };
@@ -93,16 +94,15 @@ class SwipeablePanel extends Component<
           });
       },
       onPanResponderRelease: (evt, gestureState) => {
-        const {onlyLarge} = this.props;
+        const {onlyLarge, onlySmall} = this.props;
         this.state.pan.flattenOffset();
 
         if (gestureState.dy == 0) {
           this._animateTo(this.state.status);
         } else if (gestureState.dy < -100 || gestureState.vy < -0.5) {
-          if (this.state.status == STATUS.SMALL) this._animateTo(STATUS.LARGE);
-          else {
-            this._animateTo(STATUS.LARGE);
-          }
+          if (this.state.status == STATUS.SMALL) {
+            this._animateTo(onlySmall ? STATUS.SMALL : STATUS.LARGE);
+          } else this._animateTo(STATUS.LARGE);
         } else if (gestureState.dy > 100 || gestureState.vy > 0.5) {
           if (this.state.status == STATUS.LARGE)
             this._animateTo(onlyLarge ? STATUS.CLOSED : STATUS.SMALL);
@@ -115,7 +115,7 @@ class SwipeablePanel extends Component<
   }
 
   componentDidMount = () => {
-    const {isActive, openLarge, onlyLarge} = this.props;
+    const {isActive, openLarge, onlyLarge, onlySmall} = this.props;
 
     this.animatedValueY = 0;
     this.state.pan.y.addListener(
@@ -124,25 +124,40 @@ class SwipeablePanel extends Component<
 
     this.setState({isActive});
 
-    if (isActive) {
+    if (isActive)
       this._animateTo(
-        openLarge ? STATUS.LARGE : onlyLarge ? STATUS.LARGE : STATUS.SMALL,
+        onlySmall
+          ? STATUS.SMALL
+          : openLarge
+          ? STATUS.LARGE
+          : onlyLarge
+          ? STATUS.LARGE
+          : STATUS.SMALL,
       );
-    }
   };
 
   componentDidUpdate(
     prevProps: SwipeablePanelProps,
     prevState: SwipeablePanelState,
   ) {
-    const {isActive, openLarge, onlyLarge} = this.props;
+    const {isActive, openLarge, onlyLarge, onlySmall} = this.props;
+    if (onlyLarge && onlySmall)
+      console.warn(
+        'Ops. You are using both onlyLarge and onlySmall options. onlySmall will override the onlyLarge in this situation. Please select one of them or none.',
+      );
 
     if (prevProps.isActive !== isActive) {
       this.setState({isActive});
 
       if (isActive) {
         this._animateTo(
-          openLarge ? STATUS.LARGE : onlyLarge ? STATUS.LARGE : STATUS.SMALL,
+          onlySmall
+            ? STATUS.SMALL
+            : openLarge
+            ? STATUS.LARGE
+            : onlyLarge
+            ? STATUS.LARGE
+            : STATUS.SMALL,
         );
       } else {
         this._animateTo();

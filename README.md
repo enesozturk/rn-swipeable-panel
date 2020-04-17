@@ -44,7 +44,7 @@ export default class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      swipeablePanelActive: false
+      swipeablePanelActive: false,
     };
   }
 
@@ -91,6 +91,7 @@ export default class App extends Component {
 | **fullWidth**           | `bool`     | Set true if you want to make full with panel             | `false` |
 | **openLarge**           | `bool`     | Set true if you want to open panel large by default      | `false` |
 | **onlyLarge**           | `bool`     | Set true if you want to let panel open just large mode   | `false` |
+| **onlySmall**           | `bool`     | Set true if you want to let panel open just small mode   | `false` |
 | **noBackgroundOpacity** | `bool`     | Set true if you want to disable black background opacity | `false` |
 | **style**               | `Object`   | Use this prop to override panel style                    | `{}`    |
 | **closeRootStyle**      | `Object`   | Use this prop to override close button background style  | `{}`    |

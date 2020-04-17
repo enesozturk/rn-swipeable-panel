@@ -33,6 +33,7 @@ type AppState = {
   noBackgroundOpacity: Boolean;
   bounceAnimation: Boolean;
   closeOnTouchOutside: Boolean;
+  onlySmall: Boolean;
 };
 
 export default class App extends Component<{}, AppState> {
@@ -49,6 +50,7 @@ export default class App extends Component<{}, AppState> {
       closeOnTouchOutside: false,
       noBar: false,
       showCloseButton: false,
+      onlySmall: true,
     };
   }
 
@@ -106,16 +108,6 @@ export default class App extends Component<{}, AppState> {
   };
 
   render() {
-    const {
-      isActive,
-      showCloseButton,
-      closeOnTouchOutside,
-      fullWidth,
-      noBackgroundOpacity,
-      openLarge,
-      noBar,
-    } = this.state;
-
     return (
       <SafeAreaView style={Styles.container}>
         <Header title={'Examples'} />
@@ -126,16 +118,8 @@ export default class App extends Component<{}, AppState> {
           openConfigurationsPanel={this.openConfigurationsPanel}
         />
         <SwipeablePanel
-          fullWidth={fullWidth}
-          noBar={noBar}
-          openLarge={openLarge}
-          showCloseButton={showCloseButton}
-          noBackgroundOpacity={noBackgroundOpacity}
-          isActive={isActive}
-          closeOnTouchOutside={closeOnTouchOutside}
-          onClose={() => {
-            this.setState({isActive: false});
-          }}>
+          {...this.state}
+          onClose={() => this.setState({isActive: false})}>
           {this.state.content()}
         </SwipeablePanel>
       </SafeAreaView>
