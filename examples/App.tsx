@@ -50,7 +50,7 @@ export default class App extends Component<{}, AppState> {
       closeOnTouchOutside: false,
       noBar: false,
       showCloseButton: false,
-      onlySmall: true,
+      onlySmall: false,
     };
   }
 
