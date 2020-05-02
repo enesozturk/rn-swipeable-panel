@@ -17,10 +17,10 @@ import {Settings} from './components/Settings';
 import {About} from './components/About';
 import {Configurations} from './components/Configurations';
 
-import SwipeablePanel from 'rn-swipeable-panel';
+// import SwipeablePanel from 'rn-swipeable-panel';
 
 // For developement I use
-// import SwipeablePanel from './components/Panel/Panel';
+import SwipeablePanel from './components/Panel/Panel';
 
 type AppState = {
   content: Function;

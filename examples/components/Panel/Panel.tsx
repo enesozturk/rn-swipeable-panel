@@ -183,18 +183,16 @@ class SwipeablePanel extends Component<
       tension: 80,
       friction: 25,
       useNativeDriver: true,
-    }).start();
-
-    this.setState({canScroll: newStatus == 2 ? true : false});
-
-    if (newStatus == 0) {
-      setTimeout(() => {
+      restDisplacementThreshold: 100,
+      restSpeedThreshold: 10,
+    }).start(() => {
+      if (newStatus == 0) {
         this.props.onClose();
         this.setState({
           showComponent: false,
         });
-      }, 360);
-    }
+      } else this.setState({canScroll: newStatus == 2 ? true : false});
+    });
   };
 
   render() {

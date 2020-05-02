@@ -144,20 +144,19 @@ class SwipeablePanel extends Component {
 
     Animated.spring(this.state.pan, {
       toValue: { x: 0, y: newY },
-      duration: 300,
       tension: 80,
       friction: 25,
       useNativeDriver: true,
-    }).start();
-
-    if (newStatus == 0) {
-      setTimeout(() => {
+      restDisplacementThreshold: 100,
+      restSpeedThreshold: 10,
+    }).start(() => {
+      if (newStatus == 0) {
         this.props.onClose();
         this.setState({
           showComponent: false,
         });
-      }, 360);
-    }
+      } else this.setState({ canScroll: newStatus == 2 ? true : false });
+    });
   };
 
   render() {
