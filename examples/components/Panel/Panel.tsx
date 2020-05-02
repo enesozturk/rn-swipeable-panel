@@ -182,6 +182,7 @@ class SwipeablePanel extends Component<
       toValue: {x: 0, y: newY},
       tension: 80,
       friction: 25,
+      useNativeDriver: true,
     }).start();
 
     this.setState({canScroll: newStatus == 2 ? true : false});

@@ -39,6 +39,7 @@ class SwipeablePanel extends Component {
 
     this.pan = new Animated.ValueXY({ x: 0, y: FULL_HEIGHT });
     this.isClosing = false;
+    this.animatedValueY = 0;
 
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gestureState) => true,
@@ -50,10 +51,15 @@ class SwipeablePanel extends Component {
         this.state.pan.setValue({ x: 0, y: 0 });
       },
       onPanResponderMove: (evt, gestureState) => {
-        this.state.pan.setValue({
-          x: 0,
-          y: gestureState.dy,
-        });
+        if (
+          (this.state.status == 1 &&
+            Math.abs(this.state.pan.y._value) <= this.state.pan.y._offset) ||
+          (this.state.status == 2 && this.state.pan.y._value > -1)
+        )
+          this.state.pan.setValue({
+            x: 0,
+            y: gestureState.dy,
+          });
       },
       onPanResponderRelease: (evt, gestureState) => {
         const { onlyLarge, onlySmall } = this.props;
@@ -61,11 +67,11 @@ class SwipeablePanel extends Component {
 
         if (gestureState.dy == 0) {
           this._animateTo(this.state.status);
-        } else if (gestureState.dy < -100 || gestureState.vy < -1) {
-          if (this.state.status == STATUS.SMALL)
+        } else if (gestureState.dy < -100 || gestureState.vy < -0.5) {
+          if (this.state.status == STATUS.SMALL) {
             this._animateTo(onlySmall ? STATUS.SMALL : STATUS.LARGE);
-          else this._animateTo(STATUS.LARGE);
-        } else if (gestureState.dy > 100 || gestureState.vy > 1) {
+          } else this._animateTo(STATUS.LARGE);
+        } else if (gestureState.dy > 100 || gestureState.vy > 0.5) {
           if (this.state.status == STATUS.LARGE)
             this._animateTo(onlyLarge ? STATUS.CLOSED : STATUS.SMALL);
           else this._animateTo(0);
@@ -141,6 +147,7 @@ class SwipeablePanel extends Component {
       duration: 300,
       tension: 80,
       friction: 25,
+      useNativeDriver: true,
     }).start();
 
     if (newStatus == 0) {
@@ -148,7 +155,6 @@ class SwipeablePanel extends Component {
         this.props.onClose();
         this.setState({
           showComponent: false,
-          canScroll: newStatus == 2 ? true : false,
         });
       }, 360);
     }

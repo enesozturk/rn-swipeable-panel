@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@babel/helper-validator-identifier": "^7.9.5",
     "@types/jest": "^24.0.25",
     "@types/react": "^16.9.17",
     "@types/react-native": "^0.60.26",
@@ -18,7 +19,7 @@
     "react-native": "0.61.5",
     "react-native-gesture-handler": "^1.6.1",
     "react-navigation": "^3.11.0",
-    "rn-swipeable-panel": "^1.0.18"
+    "rn-swipeable-panel": "1.0.22"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
