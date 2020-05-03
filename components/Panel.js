@@ -162,6 +162,7 @@ class SwipeablePanel extends Component {
   render() {
     const { showComponent } = this.state;
     const {
+      allowTouchOutside,
       noBackgroundOpacity,
       style,
       closeRootStyle,
@@ -177,6 +178,9 @@ class SwipeablePanel extends Component {
             backgroundColor: noBackgroundOpacity
               ? "rgba(0,0,0,0)"
               : "rgba(0,0,0,0.5)",
+          },
+          {
+            height: allowTouchOutside ? 'auto' : FULL_HEIGHT,
           },
         ]}
       >
@@ -242,6 +246,7 @@ SwipeablePanel.propTypes = {
   closeRootStyle: PropTypes.object,
   closeIconStyle: PropTypes.object,
   closeOnTouchOutside: PropTypes.bool,
+  allowTouchOutside: PropTypes.bool,
   onlyLarge: PropTypes.bool,
   onlySmall: PropTypes.bool,
   openLarge: PropTypes.bool,
@@ -261,6 +266,7 @@ SwipeablePanel.defaultProps = {
   showCloseButton: false,
   noBar: false,
   closeOnTouchOutside: false,
+  allowTouchOutside: false,
   barStyle: {},
 };
 
@@ -271,7 +277,6 @@ const SwipeablePanelStyles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: FULL_WIDTH,
-    height: FULL_HEIGHT,
     backgroundColor: "rgba(0,0,0,0.5)",
   },
   panel: {
