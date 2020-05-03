@@ -274,6 +274,7 @@ const SwipeablePanelStyles = StyleSheet.create({
   background: {
     position: "absolute",
     zIndex: 1,
+    bottom: 0,
     justifyContent: "center",
     alignItems: "center",
     width: FULL_WIDTH,
