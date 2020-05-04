@@ -147,7 +147,7 @@ class SwipeablePanel extends Component {
       tension: 80,
       friction: 25,
       useNativeDriver: true,
-      restDisplacementThreshold: 100,
+      restDisplacementThreshold: 10,
       restSpeedThreshold: 10,
     }).start(() => {
       if (newStatus == 0) {
@@ -180,7 +180,7 @@ class SwipeablePanel extends Component {
               : "rgba(0,0,0,0.5)",
           },
           {
-            height: allowTouchOutside ? 'auto' : FULL_HEIGHT,
+            height: allowTouchOutside ? "auto" : FULL_HEIGHT,
           },
         ]}
       >
@@ -189,7 +189,10 @@ class SwipeablePanel extends Component {
             <View
               style={[
                 SwipeablePanelStyles.background,
-                { backgroundColor: "rgba(0,0,0,0)" },
+                {
+                  backgroundColor: "rgba(0,0,0,0)",
+                  height: allowTouchOutside ? "auto" : FULL_HEIGHT,
+                },
               ]}
             />
           </TouchableWithoutFeedback>

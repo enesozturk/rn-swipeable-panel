@@ -37,6 +37,7 @@ type SwipeablePanelProps = {
   onlySmall?: Boolean;
   openLarge?: Boolean;
   noBar?: Boolean;
+  allowTouchOutside?: Boolean;
 };
 
 type MaybeAnimated<T> = T | Animated.Value;
@@ -183,7 +184,7 @@ class SwipeablePanel extends Component<
       tension: 80,
       friction: 25,
       useNativeDriver: true,
-      restDisplacementThreshold: 100,
+      restDisplacementThreshold: 10,
       restSpeedThreshold: 10,
     }).start(() => {
       if (newStatus == 0) {
@@ -202,6 +203,7 @@ class SwipeablePanel extends Component<
       style,
       closeRootStyle,
       closeIconStyle,
+      allowTouchOutside,
     } = this.props;
 
     return showComponent ? (
@@ -212,6 +214,7 @@ class SwipeablePanel extends Component<
             backgroundColor: noBackgroundOpacity
               ? 'rgba(0,0,0,0)'
               : 'rgba(0,0,0,0.5)',
+            height: allowTouchOutside ? 'auto' : FULL_HEIGHT,
           },
         ]}>
         {this.props.closeOnTouchOutside && (
@@ -219,7 +222,10 @@ class SwipeablePanel extends Component<
             <View
               style={[
                 SwipeablePanelStyles.background,
-                {backgroundColor: 'rgba(0,0,0,0)'},
+                {
+                  backgroundColor: 'rgba(0,0,0,0)',
+                  height: allowTouchOutside ? 'auto' : FULL_HEIGHT,
+                },
               ]}
             />
           </TouchableWithoutFeedback>
@@ -227,7 +233,9 @@ class SwipeablePanel extends Component<
         <Animated.View
           style={[
             SwipeablePanelStyles.panel,
-            {width: this.props.fullWidth ? FULL_WIDTH : FULL_WIDTH - 50},
+            {
+              width: this.props.fullWidth ? FULL_WIDTH : FULL_WIDTH - 50,
+            },
             {transform: this.state.pan.getTranslateTransform()},
             style,
           ]}
@@ -268,10 +276,10 @@ const SwipeablePanelStyles = StyleSheet.create({
   background: {
     position: 'absolute',
     zIndex: 1,
+    bottom: 0,
     justifyContent: 'center',
     alignItems: 'center',
     width: FULL_WIDTH,
-    height: FULL_HEIGHT,
     backgroundColor: 'rgba(0,0,0,0.5)',
   },
   panel: {
