@@ -6058,10 +6058,10 @@ rimraf@~2.2.6:
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
   integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
 
-rn-swipeable-panel@1.0.24:
-  version "1.0.24"
-  resolved "https://registry.yarnpkg.com/rn-swipeable-panel/-/rn-swipeable-panel-1.0.24.tgz#40295d6201dae335b06bbbdebedbfac189bbcb93"
-  integrity sha512-jS2k0vuvaPNb9rPvuHDV6tMc3J3gPWPmlB6SVoRGryUSixbf0YJp7797s3TziqIDMJtupAGfTibsRSzDDIXXSg==
+rn-swipeable-panel@1.0.26:
+  version "1.0.26"
+  resolved "https://registry.yarnpkg.com/rn-swipeable-panel/-/rn-swipeable-panel-1.0.26.tgz#11595ff725b40d66409d8e62ba2bdf5c35d87e3b"
+  integrity sha512-5aZWJCXDPEHzVT3n7DabLfepX6l0V9fVKXiVBL1/JEHZ3it0qTkC3CLsiruD1BPsz6LyBxH6uy6CgkSeVcmLeg==
   dependencies:
     prop-types "^15.7.2"
 
