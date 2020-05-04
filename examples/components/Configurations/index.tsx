@@ -1,8 +1,9 @@
 import React from 'react';
 import {StyleSheet, View, Text, Switch} from 'react-native';
+import {AppState} from '../../App';
 
 type ConfigurationsProps = {
-  state: Object;
+  state: AppState;
   changeState: Function;
 };
 
@@ -58,6 +59,15 @@ export const Configurations = ({state, changeState}: ConfigurationsProps) => {
           value={state.closeOnTouchOutside}
           onValueChange={value =>
             changeState({...state, closeOnTouchOutside: value})
+          }
+        />
+      </View>
+      <View style={Styles.configurationItem}>
+        <Text>Allow outside touch</Text>
+        <Switch
+          value={state.allowTouchOutside}
+          onValueChange={value =>
+            changeState({...state, allowTouchOutside: value})
           }
         />
       </View>

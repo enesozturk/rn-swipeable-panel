@@ -22,7 +22,7 @@ import {Configurations} from './components/Configurations';
 // For developement I use
 import SwipeablePanel from './components/Panel/Panel';
 
-type AppState = {
+export type AppState = {
   content: Function;
   isActive: Boolean;
   openLarge: Boolean;
@@ -34,6 +34,7 @@ type AppState = {
   bounceAnimation: Boolean;
   closeOnTouchOutside: Boolean;
   onlySmall: Boolean;
+  allowTouchOutside: Boolean;
 };
 
 export default class App extends Component<{}, AppState> {
@@ -51,6 +52,7 @@ export default class App extends Component<{}, AppState> {
       noBar: false,
       showCloseButton: false,
       onlySmall: false,
+      allowTouchOutside: true,
     };
   }
 

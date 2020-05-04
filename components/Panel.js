@@ -147,7 +147,7 @@ class SwipeablePanel extends Component {
       tension: 80,
       friction: 25,
       useNativeDriver: true,
-      restDisplacementThreshold: 100,
+      restDisplacementThreshold: 10,
       restSpeedThreshold: 10,
     }).start(() => {
       if (newStatus == 0) {
@@ -162,6 +162,7 @@ class SwipeablePanel extends Component {
   render() {
     const { showComponent } = this.state;
     const {
+      allowTouchOutside,
       noBackgroundOpacity,
       style,
       closeRootStyle,
@@ -178,6 +179,9 @@ class SwipeablePanel extends Component {
               ? "rgba(0,0,0,0)"
               : "rgba(0,0,0,0.5)",
           },
+          {
+            height: allowTouchOutside ? "auto" : FULL_HEIGHT,
+          },
         ]}
       >
         {this.props.closeOnTouchOutside && (
@@ -185,7 +189,10 @@ class SwipeablePanel extends Component {
             <View
               style={[
                 SwipeablePanelStyles.background,
-                { backgroundColor: "rgba(0,0,0,0)" },
+                {
+                  backgroundColor: "rgba(0,0,0,0)",
+                  height: allowTouchOutside ? "auto" : FULL_HEIGHT,
+                },
               ]}
             />
           </TouchableWithoutFeedback>
@@ -242,6 +249,7 @@ SwipeablePanel.propTypes = {
   closeRootStyle: PropTypes.object,
   closeIconStyle: PropTypes.object,
   closeOnTouchOutside: PropTypes.bool,
+  allowTouchOutside: PropTypes.bool,
   onlyLarge: PropTypes.bool,
   onlySmall: PropTypes.bool,
   openLarge: PropTypes.bool,
@@ -261,6 +269,7 @@ SwipeablePanel.defaultProps = {
   showCloseButton: false,
   noBar: false,
   closeOnTouchOutside: false,
+  allowTouchOutside: false,
   barStyle: {},
 };
 
@@ -268,10 +277,10 @@ const SwipeablePanelStyles = StyleSheet.create({
   background: {
     position: "absolute",
     zIndex: 1,
+    bottom: 0,
     justifyContent: "center",
     alignItems: "center",
     width: FULL_WIDTH,
-    height: FULL_HEIGHT,
     backgroundColor: "rgba(0,0,0,0.5)",
   },
   panel: {
