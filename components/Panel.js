@@ -311,3 +311,6 @@ const SwipeablePanelStyles = StyleSheet.create({
 });
 
 export default SwipeablePanel;
+export const SMALL_PANEL_CONTENT_HEIGHT =
+  PANEL_HEIGHT - (FULL_HEIGHT - 400) - 25;
+export const LARGE_PANEL_CONTENT_HEIGHT = PANEL_HEIGHT - 25;
