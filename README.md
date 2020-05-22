@@ -1,7 +1,5 @@
 <div align="center">
 
-<img style="margin-right:1em" src="./rn-swipeable-panel2.png" width="150" height="150">
-
 <h1>React Native Swipeable Panel</h1>
 
 **rn-swipeable-panel** is a swipeable, easy to use bottom panel for your React Native projects. You can extend panel by swiping up, make it small or close by swiping down with pan gestures. Feel free to redesign inside of the panel.
@@ -13,7 +11,7 @@
 <br/>
 
 <div align="center" style="margin-bottom:1em">
-    <img src="rn-swipeable-panel.gif" width="auto" height="600"/>
+    <img src="https://user-images.githubusercontent.com/19428358/82622067-820e1b00-9be5-11ea-9dc0-f59c1c2bedc8.gif" width="auto" height="600"/>
 </div>
 
 <br/>
