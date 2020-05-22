@@ -5,9 +5,9 @@ import {Details} from './components/Details';
 
 export const About = () => {
   return (
-    <React.Fragment>
-      <Title title="About" />
+    <>
+      <Title title="rn-swipeable-panel" />
       <Details />
-    </React.Fragment>
+    </>
   );
 };

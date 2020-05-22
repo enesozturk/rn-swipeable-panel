@@ -13,7 +13,7 @@ const BarStyles = StyleSheet.create({
   barContainer: {
     display: "flex",
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   bar: {
     width: "40%",
@@ -21,6 +21,6 @@ const BarStyles = StyleSheet.create({
     borderRadius: 5,
     marginTop: 10,
     marginBottom: 10,
-    backgroundColor: "#e2e2e2"
-  }
+    backgroundColor: "#e2e2e2",
+  },
 });

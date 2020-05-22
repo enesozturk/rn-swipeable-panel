@@ -18,6 +18,8 @@
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-gesture-handler": "^1.6.1",
+    "react-native-typography": "^1.4.1",
+    "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^3.11.0",
     "rn-swipeable-panel": "1.0.26"
   },

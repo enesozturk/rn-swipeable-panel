@@ -1,6 +1,7 @@
 import React from 'react';
 import {StyleSheet, View, Text, Switch} from 'react-native';
 import {AppState} from '../../App';
+import {material} from 'react-native-typography';
 
 type ConfigurationsProps = {
   state: AppState;
@@ -19,21 +20,21 @@ export const Configurations = ({state, changeState}: ConfigurationsProps) => {
             borderBottomColor: 'rgba(0,0,0,0.1)',
           },
         ]}>
-        <Text style={[{fontWeight: 'bold'}]}>Configurations</Text>
+        <Text style={material.headline}>Configurations</Text>
       </View>
       <View style={Styles.configurationItem}>
         <Text>Is Open</Text>
         <Switch value={state.isActive} disabled />
       </View>
       <View style={Styles.configurationItem}>
-        <Text>Full Width</Text>
+        <Text style={Styles.configurationTitle}>Full Width</Text>
         <Switch
           value={state.fullWidth}
           onValueChange={value => changeState({...state, fullWidth: value})}
         />
       </View>
       <View style={Styles.configurationItem}>
-        <Text>Close Button</Text>
+        <Text style={Styles.configurationTitle}>Close Button</Text>
         <Switch
           value={state.showCloseButton}
           onValueChange={value =>
@@ -45,7 +46,7 @@ export const Configurations = ({state, changeState}: ConfigurationsProps) => {
         />
       </View>
       <View style={Styles.configurationItem}>
-        <Text>No Background Opacity</Text>
+        <Text style={Styles.configurationTitle}>No Background Opacity</Text>
         <Switch
           value={state.noBackgroundOpacity}
           onValueChange={value =>
@@ -54,7 +55,7 @@ export const Configurations = ({state, changeState}: ConfigurationsProps) => {
         />
       </View>
       <View style={Styles.configurationItem}>
-        <Text>Close on touch outside</Text>
+        <Text style={Styles.configurationTitle}>Close on touch outside</Text>
         <Switch
           value={state.closeOnTouchOutside}
           onValueChange={value =>
@@ -63,7 +64,7 @@ export const Configurations = ({state, changeState}: ConfigurationsProps) => {
         />
       </View>
       <View style={Styles.configurationItem}>
-        <Text>Allow outside touch</Text>
+        <Text style={Styles.configurationTitle}>Allow outside touch</Text>
         <Switch
           value={state.allowTouchOutside}
           onValueChange={value =>
@@ -86,4 +87,5 @@ export const Styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#fff',
   },
+  configurationTitle: {...material.subheading},
 });

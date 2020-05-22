@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
+import {material} from 'react-native-typography';
 
 export const Title = ({title}) => {
   return (
@@ -12,14 +13,15 @@ export const Title = ({title}) => {
 const Styles = StyleSheet.create({
   container: {
     width: '100%',
-    padding: 15,
+    paddingHorizontal: 24,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'flex-start',
+    marginTop: 18,
   },
   title: {
-    fontSize: 22,
+    ...material.headline,
     fontWeight: '500',
     color: 'black',
   },

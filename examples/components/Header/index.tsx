@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
+import {material} from 'react-native-typography';
 
 type HeaderProps = {
   title: string;
@@ -30,8 +31,8 @@ const HeaderStyles = StyleSheet.create({
     position: 'relative',
   },
   title: {
-    fontSize: 24,
-    color: 'white',
+    ...material.display1,
+    color: '#24292E',
     fontWeight: '600',
     marginBottom: 5,
   },

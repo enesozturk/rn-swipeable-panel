@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, View, Text} from 'react-native';
+import {material} from 'react-native-typography';
 
 export const Details = () => {
   return (
@@ -7,7 +8,7 @@ export const Details = () => {
       <View style={Styles.content}>
         <Text style={Styles.paragraph}>
           {
-            'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. \n\nUt enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.'
+            'rn-swipeable-panel is a swipeable, easy to use bottom panel for your React Native projects. You can extend panel by swiping up, make it small or close by swiping down with pan gestures. Feel free to redesign inside of the panel.'
           }
         </Text>
       </View>
@@ -18,21 +19,16 @@ export const Details = () => {
 const Styles = StyleSheet.create({
   container: {
     width: '100%',
-    padding: 15,
+    paddingHorizontal: 24,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'flex-start',
-  },
-  title: {
-    fontSize: 16,
-    fontWeight: '500',
-    color: 'gray',
+    marginTop: 18,
   },
   content: {
     width: '100%',
-    marginTop: 10,
     color: 'gray',
   },
-  paragraph: {color: 'gray'},
+  paragraph: {...material.body1, color: 'gray'},
 });

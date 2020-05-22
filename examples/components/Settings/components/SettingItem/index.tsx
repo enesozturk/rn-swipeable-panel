@@ -1,5 +1,6 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View, Text} from 'react-native';
+import {material} from 'react-native-typography';
 
 type SettingItemProps = {
   title: string;
@@ -39,10 +40,15 @@ export const SettingItem = ({
         ]}>
         <Text
           style={[
-            Styles.title,
+            isHeader
+              ? {
+                  ...material.headline,
+                }
+              : {
+                  ...material.subheading,
+                },
             {
               color: isRed ? 'red' : 'black',
-              fontWeight: isHeader ? 'bold' : 'normal',
             },
           ]}>
           {title}
@@ -69,8 +75,5 @@ const Styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'row',
     alignItems: 'center',
-  },
-  title: {
-    fontSize: 16,
   },
 });

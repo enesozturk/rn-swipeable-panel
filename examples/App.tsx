@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet} from 'react-native';
+import {StyleSheet, StatusBar} from 'react-native';
 import {SafeAreaView} from 'react-navigation';
 
 import {Header} from './components/Header';
@@ -16,11 +16,12 @@ import List from './scenes/List';
 import {Settings} from './components/Settings';
 import {About} from './components/About';
 import {Configurations} from './components/Configurations';
+import {DarkPanel} from './components/DarkShoppingCart';
 
-import SwipeablePanel from 'rn-swipeable-panel';
+// import SwipeablePanel from 'rn-swipeable-panel';
 
-// For developement I use
-// import SwipeablePanel from './components/Panel/Panel';
+// For developement I use;
+import SwipeablePanel from './components/Panel/Panel';
 
 export type AppState = {
   content: Function;
@@ -29,12 +30,14 @@ export type AppState = {
   onlyLarge: Boolean;
   fullWidth: Boolean;
   noBar: Boolean;
+  barStyle: Object;
   showCloseButton: Boolean;
   noBackgroundOpacity: Boolean;
   bounceAnimation: Boolean;
   closeOnTouchOutside: Boolean;
   onlySmall: Boolean;
   allowTouchOutside: Boolean;
+  panelStyles: Object;
 };
 
 export default class App extends Component<{}, AppState> {
@@ -53,6 +56,8 @@ export default class App extends Component<{}, AppState> {
       showCloseButton: false,
       onlySmall: false,
       allowTouchOutside: false,
+      barStyle: {},
+      panelStyles: {},
     };
   }
 
@@ -62,6 +67,7 @@ export default class App extends Component<{}, AppState> {
       openLarge: true,
       fullWidth: true,
       showCloseButton: true,
+      panelStyles: {},
       content: () => <About />,
     });
   };
@@ -72,6 +78,7 @@ export default class App extends Component<{}, AppState> {
       openLarge: false,
       fullWidth: true,
       showCloseButton: true,
+      panelStyles: {},
       content: () => <Settings />,
     });
   };
@@ -83,9 +90,26 @@ export default class App extends Component<{}, AppState> {
       fullWidth: false,
       showCloseButton: false,
       noBar: false,
+      panelStyles: {},
       content: () => (
         <Configurations state={this.state} changeState={this.changeState} />
       ),
+    });
+  };
+
+  openDarkPanel = () => {
+    this.setState({
+      isActive: true,
+      openLarge: false,
+      fullWidth: true,
+      showCloseButton: true,
+      noBar: false,
+      panelStyles: {
+        style: {backgroundColor: '#1f1f1f'},
+        barStyle: {backgroundColor: 'rgba(255,255,255,0.2)'},
+        closeRootStyle: {backgroundColor: 'rgba(255,255,255,0.2)'},
+      },
+      content: () => <DarkPanel />,
     });
   };
 
@@ -112,15 +136,18 @@ export default class App extends Component<{}, AppState> {
   render() {
     return (
       <SafeAreaView style={Styles.container}>
+        <StatusBar barStyle="dark-content" />
         <Header title={'Examples'} />
         <List
           openDefaultPanel={this.openDefaultPanel}
           openSettingsPanel={this.openSettingsPanel}
           openAboutPanel={this.openAboutPanel}
           openConfigurationsPanel={this.openConfigurationsPanel}
+          openDarkPanel={this.openDarkPanel}
         />
         <SwipeablePanel
           {...this.state}
+          {...this.state.panelStyles}
           onClose={() => this.setState({isActive: false})}>
           {this.state.content()}
         </SwipeablePanel>
@@ -134,6 +161,6 @@ const Styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#82B7E9',
+    backgroundColor: '#f4f4f4',
   },
 });
