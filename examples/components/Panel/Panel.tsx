@@ -32,7 +32,7 @@ type SwipeablePanelProps = {
   style?: Object;
   closeRootStyle?: Object;
   closeIconStyle?: Object;
-  closeOnTouchOutside: Boolean;
+  closeOnTouchOutside?: Boolean;
   onlyLarge?: Boolean;
   onlySmall?: Boolean;
   openLarge?: Boolean;
