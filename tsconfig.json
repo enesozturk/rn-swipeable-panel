@@ -5,7 +5,8 @@
     "jsx": "react",
     "declaration": true,
     "outDir": "./lib",
-    "strict": true
+    "strict": true,
+    "types": ["react", "react-native"]
   },
   "include": ["src", "index.d.ts"],
   "exclude": ["node_modules", "**/__tests__/*"]
