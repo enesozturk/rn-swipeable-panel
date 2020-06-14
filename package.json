@@ -1,6 +1,6 @@
 {
   "name": "rn-swipeable-panel",
-  "version": "1.0.29",
+  "version": "1.1.0",
   "description": "Swipeable panel for react native",
   "main": "index.js",
   "keywords": [
@@ -21,7 +21,11 @@
     "bottom-up-panel"
   ],
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf ./lib && tsc",
+    "prepare": "yarn build",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.js\"",
+    "lint": "tslint -p tsconfig.json"
   },
   "repository": {
     "type": "git",
@@ -32,7 +36,7 @@
   },
   "homepage": "https://github.com/enesozturk/rn-swipeable-panel",
   "files": [
-    "components"
+    "lib/*/**"
   ],
   "author": "Enes Ozturk",
   "contributors": [
@@ -43,7 +47,16 @@
   ],
   "license": "ISC",
   "devDependencies": {
-    "metro-react-native-babel-preset": "^0.54.1"
+    "@types/react": "^16.9.36",
+    "@types/react-dom": "^16.9.8",
+    "@types/react-native": "^0.62.13",
+    "metro-react-native-babel-preset": "^0.54.1",
+    "prettier": "^2.0.5",
+    "react": "^16.13.1",
+    "react-native": "^0.62.2",
+    "tslint": "^6.1.2",
+    "tslint-config-prettier": "^1.18.0",
+    "typescript": "^3.9.5"
   },
   "dependencies": {
     "prop-types": "^15.7.2"

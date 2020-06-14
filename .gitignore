@@ -1,6 +1,7 @@
 # .gitignore
 #
 /node_modules
+/lib
 
 # OSX
 #
