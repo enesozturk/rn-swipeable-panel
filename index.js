@@ -1,3 +1,3 @@
-import SwipeablePanel from './components/Panel';
+import SwipeablePanel from './src/components/Panel';
 
 export default SwipeablePanel;
