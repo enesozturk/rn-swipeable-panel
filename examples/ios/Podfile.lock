@@ -219,7 +219,7 @@ PODS:
     - ReactCommon/jscallinvoker (= 0.61.5)
   - RNGestureHandler (1.6.1):
     - React
-  - RNVectorIcons (6.6.0):
+  - RNVectorIcons (6.7.0):
     - React
   - SGActionView (0.0.1)
   - Yoga (1.14.0)
@@ -351,7 +351,7 @@ SPEC CHECKSUMS:
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
-  RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
+  RNVectorIcons: 368d6d8b8301224e5ffb6254191f4f8876c2be0d
   SGActionView: 7d7f2af343936932cab8302749e5345a1732c0b7
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 

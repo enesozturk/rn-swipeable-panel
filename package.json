@@ -2,7 +2,7 @@
   "name": "rn-swipeable-panel",
   "version": "1.1.0",
   "description": "Swipeable panel for react native",
-  "main": "index.js",
+  "main": "./lib/index.js",
   "keywords": [
     "react",
     "react native",
@@ -27,6 +27,7 @@
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.js\"",
     "lint": "tslint -p tsconfig.json"
   },
+  "types": "./lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/enesozturk/rn-swipeable-panel"
@@ -57,6 +58,7 @@
     "typescript": "^3.9.5"
   },
   "dependencies": {
+    "@types/node": "^14.0.13",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
     "react-native": "^0.62.2"

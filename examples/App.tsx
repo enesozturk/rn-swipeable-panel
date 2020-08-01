@@ -18,10 +18,9 @@ import {About} from './components/About';
 import {Configurations} from './components/Configurations';
 import {DarkPanel} from './components/DarkShoppingCart';
 
-// import SwipeablePanel from 'rn-swipeable-panel';
-
+import SwipeablePanel from 'rn-swipeable-panel';
 // For developement I use;
-import SwipeablePanel from './components/Panel/Panel';
+//import SwipeablePanel from './components/Panel/Panel';
 
 export type AppState = {
   content: Function;
