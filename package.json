@@ -1,8 +1,26 @@
 {
   "name": "rn-swipeable-panel",
-  "version": "1.1.0",
+  "version": "1.1.7",
   "description": "Swipeable panel for react native",
-  "main": "./lib/index.js",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "typings": "dist/index.d.ts",
+  "module": "dist/index.js",
+  "sideEffects": false,
+  "files": [
+    "src/",
+    "dist/"
+  ],
+  "directories": {
+    "example": "example"
+  },
+  "scripts": {
+    "test": "jest --config jestconfig.json",
+    "build": "rm -rf ./dist && tsc",
+    "prepare": "rm -rf ./dist && tsc",
+    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\"",
+    "lint": "tslint -p tsconfig.json"
+  },
   "keywords": [
     "react",
     "react native",
@@ -20,14 +38,6 @@
     "bottom-up",
     "bottom-up-panel"
   ],
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf ./lib && tsc",
-    "prepare": "rm -rf ./lib && tsc",
-    "format": "prettier --write \"src/**/*.ts\" \"src/**/*.tsx\" \"src/**/*.js\"",
-    "lint": "tslint -p tsconfig.json"
-  },
-  "types": "./lib/index.d.ts",
   "repository": {
     "type": "git",
     "url": "https://github.com/enesozturk/rn-swipeable-panel"
@@ -36,9 +46,6 @@
     "url": "https://github.com/enesozturk/rn-swipeable-panel/issues"
   },
   "homepage": "https://github.com/enesozturk/rn-swipeable-panel",
-  "files": [
-    "lib/*/**"
-  ],
   "author": "Enes Ozturk",
   "contributors": [
     {
@@ -48,11 +55,14 @@
   ],
   "license": "ISC",
   "devDependencies": {
+    "@types/jest": "^26.0.8",
     "@types/react": "^16.9.36",
     "@types/react-dom": "^16.9.8",
     "@types/react-native": "^0.62.13",
+    "jest": "^26.2.2",
     "metro-react-native-babel-preset": "^0.54.1",
     "prettier": "^2.0.5",
+    "ts-jest": "^26.1.4",
     "tslint": "^6.1.2",
     "tslint-config-prettier": "^1.18.0",
     "typescript": "^3.9.5"
@@ -61,6 +71,7 @@
     "@types/node": "^14.0.13",
     "prop-types": "^15.7.2",
     "react": "^16.13.1",
-    "react-native": "^0.62.2"
+    "react-native": "^0.62.2",
+    "rn-swipeable-panel": "1.1.5"
   }
 }

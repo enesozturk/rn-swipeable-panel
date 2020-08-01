@@ -6756,15 +6756,59 @@ rimraf@~2.2.6:
   resolved "https://registry.yarnpkg.com/rimraf/-/rimraf-2.2.8.tgz#e439be2aaee327321952730f99a8929e4fc50582"
   integrity sha1-5Dm+Kq7jJzIZUnMPmaiSnk/FBYI=
 
-rn-swipeable-panel@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/rn-swipeable-panel/-/rn-swipeable-panel-1.1.0.tgz#6b5898d4397ff9355bc17c132d7a88c2b6f4ab30"
-  integrity sha512-mSuXs7rcKineY7ZYi8g+0gJi9pl7wuP05NXLZsNf760smfYNPtg9/MB+bNvNrSXcSZMAak9GObktgDFpiah4iQ==
+rn-swipeable-panel@1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/rn-swipeable-panel/-/rn-swipeable-panel-1.1.2.tgz#b8d5d7d05eed63773cace606ae2e096adcff72f2"
+  integrity sha512-a1fQ3wSygQyunOmp3jYBG+7BuJ/MmyT47eRlKsEmzCJWcNLl3QQKqsIVw9DCRTEvCJ+Mh7uM007oMQQDDww9ZQ==
   dependencies:
     "@types/node" "^14.0.13"
     prop-types "^15.7.2"
     react "^16.13.1"
     react-native "^0.62.2"
+
+rn-swipeable-panel@1.1.3:
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/rn-swipeable-panel/-/rn-swipeable-panel-1.1.3.tgz#da7cfabcb0164b4fdbfd8ebd676ef0601b9eac61"
+  integrity sha512-W+HfCwXfwUv5yRWLjxLKWAgdiUA5ASP1UyiRFgY41s8uEDmFM86jodktzX8Z1VMVuTfxU22gbRfYXBonZAXmWw==
+  dependencies:
+    "@types/node" "^14.0.13"
+    prop-types "^15.7.2"
+    react "^16.13.1"
+    react-native "^0.62.2"
+    rn-swipeable-panel "1.1.2"
+
+rn-swipeable-panel@1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/rn-swipeable-panel/-/rn-swipeable-panel-1.1.4.tgz#371d904220f603ec136d0ea74019ec264a3b4715"
+  integrity sha512-VIJzAeTvw1UsUvf9z/IchEhDTfJwqa5cZmL88cO0NFQ3UF8hFM5+1EgA/W5eH5xH09ycES8isHDfKgTlHDzckg==
+  dependencies:
+    "@types/node" "^14.0.13"
+    prop-types "^15.7.2"
+    react "^16.13.1"
+    react-native "^0.62.2"
+    rn-swipeable-panel "1.1.3"
+
+rn-swipeable-panel@1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/rn-swipeable-panel/-/rn-swipeable-panel-1.1.5.tgz#4057de38d006520cc1561e090ece55e84401918e"
+  integrity sha512-sLsHoyGxB1+8rBBEDOEEwP/j4aLqeeI1+5vA7mqYX6hqzRAmlX3E//r8F72uNk/ExgGXpvU4SKKR8gPLqUzKBg==
+  dependencies:
+    "@types/node" "^14.0.13"
+    prop-types "^15.7.2"
+    react "^16.13.1"
+    react-native "^0.62.2"
+    rn-swipeable-panel "1.1.4"
+
+rn-swipeable-panel@1.1.7:
+  version "1.1.7"
+  resolved "https://registry.yarnpkg.com/rn-swipeable-panel/-/rn-swipeable-panel-1.1.7.tgz#3e1bc3efb6f3ee4a16b217dfae67f4c674faa08f"
+  integrity sha512-gspJ5LEt+qVVgkrsMiykbpniTUW3ra4ScFb5c75bH/WzPAbUMfdGQC4jNq/+zwOXAGimWUtv/ZKn4iivCHaUAA==
+  dependencies:
+    "@types/node" "^14.0.13"
+    prop-types "^15.7.2"
+    react "^16.13.1"
+    react-native "^0.62.2"
+    rn-swipeable-panel "1.1.5"
 
 rsvp@^4.8.4:
   version "4.8.4"

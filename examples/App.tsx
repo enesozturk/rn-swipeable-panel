@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet, StatusBar} from 'react-native';
+import {StyleSheet, StatusBar, Text} from 'react-native';
 import {SafeAreaView} from 'react-navigation';
 
 import {Header} from './components/Header';
@@ -17,11 +17,7 @@ import {Settings} from './components/Settings';
 import {About} from './components/About';
 import {Configurations} from './components/Configurations';
 import {DarkPanel} from './components/DarkShoppingCart';
-
-// import SwipeablePanel from 'rn-swipeable-panel';
-
-// For developement I use;
-import SwipeablePanel from './components/Panel/Panel';
+import SwipeablePanel from 'rn-swipeable-panel';
 
 export type AppState = {
   content: Function;
@@ -145,11 +141,8 @@ export default class App extends Component<{}, AppState> {
           openConfigurationsPanel={this.openConfigurationsPanel}
           openDarkPanel={this.openDarkPanel}
         />
-        <SwipeablePanel
-          {...this.state}
-          {...this.state.panelStyles}
-          onClose={() => this.setState({isActive: false})}>
-          {this.state.content()}
+        <SwipeablePanel isActive={true} barStyle={{}} onClose={() => {}}>
+          <Text>Enes</Text>
         </SwipeablePanel>
       </SafeAreaView>
     );

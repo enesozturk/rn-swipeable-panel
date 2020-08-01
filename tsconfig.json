@@ -1,15 +1,16 @@
 {
   "compilerOptions": {
     "module": "commonjs",
-    "lib": ["ES6"],
-    "target": "es6",
+    "lib": ["ES2015"],
+    "target": "ES2015",
     "jsx": "react-native",
     "declaration": true,
     "allowSyntheticDefaultImports": true,
+    "isolatedModules": true,
     "strict": true,
     "types": ["react", "react-native"],
     "baseUrl": "./",
-    "outDir": "./lib",
+    "outDir": "dist",
     "paths": {
       "*": ["src/*", "node_modules/*"]
     },
@@ -17,5 +18,5 @@
   },
   "files": ["./index.d.ts"],
   "include": ["src", "index.d.ts"],
-  "exclude": ["node_modules", "**/__tests__/*"]
+  "exclude": ["node_modules", "dist", "**/__tests__/*"]
 }
