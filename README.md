@@ -27,10 +27,10 @@ $ yarn add rn-swipeable-panel
 ## 🚀 How to use
 
 ```javascript
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
-import SwipeablePanel from "rn-swipeable-panel";
+import { SwipeablePanel } from 'rn-swipeable-panel';
 
 export default App = () => {
   const [panelProps, setPanelProps] = useState({
