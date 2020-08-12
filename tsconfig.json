@@ -1,22 +1,20 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "lib": ["ES2015"],
-    "target": "ES2015",
-    "jsx": "react-native",
-    "declaration": true,
-    "allowSyntheticDefaultImports": true,
-    "isolatedModules": true,
-    "strict": true,
-    "types": ["react", "react-native"],
-    "baseUrl": "./",
     "outDir": "dist",
-    "paths": {
-      "*": ["src/*", "node_modules/*"]
-    },
-    "typeRoots": ["node_modules/@types"]
+    "module": "esnext",
+    "lib": ["dom", "esnext"],
+    "moduleResolution": "node",
+    "jsx": "react",
+    "sourceMap": true,
+    "declaration": true,
+    "esModuleInterop": true,
+    "noImplicitReturns": true,
+    "noImplicitThis": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "suppressImplicitAnyIndexErrors": true,
+    "allowSyntheticDefaultImports": true
   },
-  "files": ["./index.d.ts"],
-  "include": ["src", "index.d.ts"],
-  "exclude": ["node_modules", "dist", "**/__tests__/*"]
+  "include": ["src"],
+  "exclude": ["node_modules", "dist", "example"]
 }
