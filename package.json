@@ -1,6 +1,6 @@
 {
   "name": "rn-swipeable-panel",
-  "version": "1.1.12",
+  "version": "1.1.15",
   "description": "Swipeable bottom panel for react native",
   "author": "Enes Ozturk",
   "license": "MIT",
@@ -9,6 +9,7 @@
     "url": "https://github.com/enesozturk/rn-swipeable-panel"
   },
   "main": "dist/index.js",
+  "types": "./index.d.ts",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",
   "engines": {

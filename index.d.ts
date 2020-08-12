@@ -5,6 +5,9 @@
 
 import * as React from 'react';
 
+declare var LARGE_PANEL_CONTENT_HEIGHT: number;
+declare var SMALL_PANEL_CONTENT_HEIGHT: number;
+
 declare interface SwipeablePanelProps extends React.Props<SwipeablePanel> {
   /**
    * Required prop for panels actual state. Set true if you want to open panel
@@ -69,7 +72,7 @@ declare interface SwipeablePanelProps extends React.Props<SwipeablePanel> {
   /**
    * Use this prop to override bar style
    */
-  barStyle: object;
+  barStyle?: object;
 
   /**
    * Set true if you want to make toucable outside of panel
@@ -86,4 +89,4 @@ declare interface SwipeablePanelProps extends React.Props<SwipeablePanel> {
 
 declare class SwipeablePanel extends React.Component<SwipeablePanelProps, any> {}
 
-export default SwipeablePanel;
+export { SwipeablePanel, LARGE_PANEL_CONTENT_HEIGHT, SMALL_PANEL_CONTENT_HEIGHT };

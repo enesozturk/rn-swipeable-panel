@@ -1,10 +1,11 @@
 {
   "compilerOptions": {
     "outDir": "dist",
-    "module": "esnext",
-    "lib": ["dom", "esnext"],
+    "module": "ES2015",
+    "lib": ["ES2015"],
+    "jsx": "react-native",
     "moduleResolution": "node",
-    "jsx": "react",
+    "strict": true,
     "sourceMap": true,
     "declaration": true,
     "esModuleInterop": true,
@@ -13,7 +14,7 @@
     "noImplicitAny": true,
     "strictNullChecks": true,
     "suppressImplicitAnyIndexErrors": true,
-    "allowSyntheticDefaultImports": true
+    "isolatedModules": true
   },
   "include": ["src"],
   "exclude": ["node_modules", "dist", "example"]
