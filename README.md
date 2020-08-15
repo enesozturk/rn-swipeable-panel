@@ -18,9 +18,19 @@
 
 ## ⚙️ Installation
 
+To install the package;
+
 ```
 $ yarn add rn-swipeable-panel
 ```
+
+If you use Typescript, you can install types of the rn-swipeable-panel;
+
+```
+$ yarn add @types/rn-swipeable-panel
+```
+
+✅ It is done!
 
 <!-- ## Usage -->
 
