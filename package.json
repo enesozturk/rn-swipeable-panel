@@ -9,7 +9,6 @@
     "url": "https://github.com/enesozturk/rn-swipeable-panel"
   },
   "main": "dist/index.js",
-  "types": "./index.d.ts",
   "module": "dist/index.modern.js",
   "source": "src/index.tsx",
   "engines": {
