@@ -96,7 +96,7 @@ class SwipeablePanel extends React.Component<SwipeablePanelProps, SwipeablePanel
         )
           this.state.pan.setValue({
             x: 0,
-            y: gestureState.dy,
+            y: Math.max(0, gestureState.dy),
           });
       },
       onPanResponderRelease: (evt, gestureState) => {
