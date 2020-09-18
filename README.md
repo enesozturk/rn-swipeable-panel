@@ -18,19 +18,29 @@
 
 ## ⚙️ Installation
 
+To install the package;
+
 ```
 $ yarn add rn-swipeable-panel
 ```
+
+If you use Typescript, you can install types of the rn-swipeable-panel;
+
+```
+$ yarn add @types/rn-swipeable-panel
+```
+
+✅ It is done!
 
 <!-- ## Usage -->
 
 ## 🚀 How to use
 
 ```javascript
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
-import SwipeablePanel from "rn-swipeable-panel";
+import { SwipeablePanel } from 'rn-swipeable-panel';
 
 export default App = () => {
   const [panelProps, setPanelProps] = useState({
