@@ -1,21 +1,22 @@
 import React, {Component} from 'react';
 import {
-  StyleSheet,
-  ScrollView,
-  View,
-  TouchableHighlight,
-  TouchableWithoutFeedback,
   Animated,
   Dimensions,
   PanResponder,
+  ScrollView,
+  StyleSheet,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
+  View,
 } from 'react-native';
-
 import {Bar} from './Bar';
 import {Close} from './Close';
 
-let FULL_HEIGHT = Dimensions.get('window').height;
+let NOTCH_PREVENTION = 14;
+
+let FULL_HEIGHT = Dimensions.get('window').height - NOTCH_PREVENTION;
 let FULL_WIDTH = Dimensions.get('window').width;
-let PANEL_HEIGHT = FULL_HEIGHT - 100;
+let PANEL_HEIGHT = FULL_HEIGHT - NOTCH_PREVENTION;
 
 const STATUS = {
   CLOSED: 0,
