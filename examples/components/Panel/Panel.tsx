@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   Animated,
   Dimensions,
@@ -7,16 +7,17 @@ import {
   StyleSheet,
   TouchableHighlight,
   TouchableWithoutFeedback,
-  View,
+  View
 } from 'react-native';
-import {Bar} from './Bar';
-import {Close} from './Close';
+import { Bar } from './Bar';
+import { Close } from './Close';
 
 let NOTCH_PREVENTION = 14;
+let TOP_EXTRA_SPACE = 100 + NOTCH_PREVENTION;
 
 let FULL_HEIGHT = Dimensions.get('window').height - NOTCH_PREVENTION;
 let FULL_WIDTH = Dimensions.get('window').width;
-let PANEL_HEIGHT = FULL_HEIGHT - NOTCH_PREVENTION;
+let PANEL_HEIGHT = FULL_HEIGHT - TOP_EXTRA_SPACE;
 
 const STATUS = {
   CLOSED: 0,
@@ -150,7 +151,7 @@ class SwipeablePanel extends Component<
     const dimesions = Dimensions.get('screen');
     FULL_HEIGHT = dimesions.height;
     FULL_WIDTH = dimesions.width;
-    PANEL_HEIGHT = FULL_HEIGHT - 100;
+    PANEL_HEIGHT = FULL_HEIGHT - TOP_EXTRA_SPACE;
 
     this.setState({
       orientation:
@@ -324,7 +325,7 @@ const SwipeablePanelStyles = StyleSheet.create({
     position: 'absolute',
     height: PANEL_HEIGHT,
     width: FULL_WIDTH - 50,
-    transform: [{translateY: FULL_HEIGHT - 100}],
+    transform: [{translateY: FULL_HEIGHT - TOP_EXTRA_SPACE}],
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'white',
