@@ -8,6 +8,7 @@ import {
   Animated,
   Dimensions,
   PanResponder,
+  Text
 } from 'react-native';
 
 import { Bar } from './Bar';
@@ -39,6 +40,8 @@ type SwipeablePanelProps = {
   noBar?: boolean;
   barStyle?: object;
   allowTouchOutside?: boolean;
+  header?: object
+  footer?: object
 };
 
 type MaybeAnimated<T> = T | Animated.Value;
@@ -56,11 +59,15 @@ type SwipeablePanelState = {
   panelHeight: number;
 };
 
+let listView
+
 class SwipeablePanel extends React.Component<SwipeablePanelProps, SwipeablePanelState> {
   pan: Animated.ValueXY;
   isClosing: boolean;
   _panResponder: any;
   animatedValueY: number;
+  scrollRef: any
+
   constructor(props: SwipeablePanelProps) {
     super(props);
     this.state = {
@@ -79,6 +86,7 @@ class SwipeablePanel extends React.Component<SwipeablePanelProps, SwipeablePanel
     this.pan = new Animated.ValueXY({ x: 0, y: FULL_HEIGHT });
     this.isClosing = false;
     this.animatedValueY = 0;
+    this.scrollRef = React.createRef()
 
     this._panResponder = PanResponder.create({
       onStartShouldSetPanResponder: (evt, gestureState) => true,
@@ -112,6 +120,7 @@ class SwipeablePanel extends React.Component<SwipeablePanelProps, SwipeablePanel
           else this._animateTo(0);
         } else this._animateTo(this.state.status);
       },
+
     });
   }
 
@@ -249,14 +258,19 @@ class SwipeablePanel extends React.Component<SwipeablePanelProps, SwipeablePanel
           {this.props.showCloseButton && (
             <Close rootStyle={closeRootStyle} iconStyle={closeIconStyle} onPress={this.props.onClose} />
           )}
+          {this.props.header}
           <ScrollView
+            ref={ref => (this.scrollRef = ref)}
+            onContentSizeChange={() => {
+              this.scrollRef.scrollToEnd();
+            }}
             onTouchStart={() => {
               return false;
             }}
             onTouchEnd={() => {
               return false;
             }}
-            contentContainerStyle={SwipeablePanelStyles.scrollViewContentContainerStyle}
+            style={SwipeablePanelStyles.scrollViewContentContainerStyle}
           >
             {this.state.canScroll ? (
               <TouchableHighlight>
@@ -266,6 +280,7 @@ class SwipeablePanel extends React.Component<SwipeablePanelProps, SwipeablePanel
               this.props.children
             )}
           </ScrollView>
+          {this.props.footer}
         </Animated.View>
       </Animated.View>
     ) : null;
