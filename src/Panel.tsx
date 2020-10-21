@@ -39,6 +39,8 @@ type SwipeablePanelProps = {
   noBar?: boolean;
   barStyle?: object;
   allowTouchOutside?: boolean;
+  header?: object
+  footer?: object
 };
 
 type MaybeAnimated<T> = T | Animated.Value;
@@ -249,6 +251,7 @@ class SwipeablePanel extends React.Component<SwipeablePanelProps, SwipeablePanel
           {this.props.showCloseButton && (
             <Close rootStyle={closeRootStyle} iconStyle={closeIconStyle} onPress={this.props.onClose} />
           )}
+          {this.props.header}
           <ScrollView
             onTouchStart={() => {
               return false;
@@ -266,6 +269,7 @@ class SwipeablePanel extends React.Component<SwipeablePanelProps, SwipeablePanel
               this.props.children
             )}
           </ScrollView>
+          {this.props.footer}
         </Animated.View>
       </Animated.View>
     ) : null;
