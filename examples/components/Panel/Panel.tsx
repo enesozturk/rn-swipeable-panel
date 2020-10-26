@@ -1,23 +1,21 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
+  StyleSheet,
+  ScrollView,
+  View,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
   Animated,
   Dimensions,
   PanResponder,
-  ScrollView,
-  StyleSheet,
-  TouchableHighlight,
-  TouchableWithoutFeedback,
-  View
 } from 'react-native';
-import { Bar } from './Bar';
-import { Close } from './Close';
 
-let NOTCH_PREVENTION = 14;
-let TOP_EXTRA_SPACE = 100 + NOTCH_PREVENTION;
+import {Bar} from './Bar';
+import {Close} from './Close';
 
-let FULL_HEIGHT = Dimensions.get('window').height - NOTCH_PREVENTION;
+let FULL_HEIGHT = Dimensions.get('window').height;
 let FULL_WIDTH = Dimensions.get('window').width;
-let PANEL_HEIGHT = FULL_HEIGHT - TOP_EXTRA_SPACE;
+let PANEL_HEIGHT = FULL_HEIGHT - 100;
 
 const STATUS = {
   CLOSED: 0,
@@ -26,30 +24,30 @@ const STATUS = {
 };
 
 type SwipeablePanelProps = {
-  isActive: Boolean;
-  onClose: Function;
-  showCloseButton?: Boolean;
-  fullWidth?: Boolean;
-  noBackgroundOpacity?: Boolean;
-  style?: Object;
-  closeRootStyle?: Object;
-  closeIconStyle?: Object;
-  closeOnTouchOutside?: Boolean;
-  onlyLarge?: Boolean;
-  onlySmall?: Boolean;
-  openLarge?: Boolean;
-  noBar?: Boolean;
-  barStyle: Object;
-  allowTouchOutside?: Boolean;
+  isActive: boolean;
+  onClose: () => void;
+  showCloseButton?: boolean;
+  fullWidth?: boolean;
+  noBackgroundOpacity?: boolean;
+  style?: object;
+  closeRootStyle?: object;
+  closeIconStyle?: object;
+  closeOnTouchOutside?: boolean;
+  onlyLarge?: boolean;
+  onlySmall?: boolean;
+  openLarge?: boolean;
+  noBar?: boolean;
+  barStyle?: object;
+  allowTouchOutside?: boolean;
 };
 
 type MaybeAnimated<T> = T | Animated.Value;
 
 type SwipeablePanelState = {
   status: number;
-  isActive: Boolean;
-  showComponent: Boolean;
-  canScroll: Boolean;
+  isActive: boolean;
+  showComponent: boolean;
+  canScroll: boolean;
   opacity: Animated.Value;
   pan: any;
   orientation: 'portrait' | 'landscape';
@@ -63,9 +61,9 @@ class SwipeablePanel extends Component<
   SwipeablePanelState
 > {
   pan: Animated.ValueXY;
-  isClosing: Boolean;
+  isClosing: boolean;
   _panResponder: any;
-  animatedValueY: Number;
+  animatedValueY: number;
   constructor(props: SwipeablePanelProps) {
     super(props);
     this.state = {
@@ -96,26 +94,29 @@ class SwipeablePanel extends Component<
       },
       onPanResponderMove: (evt, gestureState) => {
         if (
-          (this.state.status == 1 &&
+          (this.state.status === 1 &&
             Math.abs(this.state.pan.y._value) <= this.state.pan.y._offset) ||
-          (this.state.status == 2 && this.state.pan.y._value > -1)
+          (this.state.status === 2 && this.state.pan.y._value > -1)
         )
           this.state.pan.setValue({
             x: 0,
-            y: gestureState.dy,
+            y:
+              this.state.status === STATUS.LARGE
+                ? Math.max(0, gestureState.dy)
+                : gestureState.dy,
           });
       },
       onPanResponderRelease: (evt, gestureState) => {
         const {onlyLarge, onlySmall} = this.props;
         this.state.pan.flattenOffset();
 
-        if (gestureState.dy == 0) this._animateTo(this.state.status);
+        if (gestureState.dy === 0) this._animateTo(this.state.status);
         else if (gestureState.dy < -100 || gestureState.vy < -0.5) {
-          if (this.state.status == STATUS.SMALL)
+          if (this.state.status === STATUS.SMALL)
             this._animateTo(onlySmall ? STATUS.SMALL : STATUS.LARGE);
           else this._animateTo(STATUS.LARGE);
         } else if (gestureState.dy > 100 || gestureState.vy > 0.5) {
-          if (this.state.status == STATUS.LARGE)
+          if (this.state.status === STATUS.LARGE)
             this._animateTo(onlyLarge ? STATUS.CLOSED : STATUS.SMALL);
           else this._animateTo(0);
         } else this._animateTo(this.state.status);
@@ -151,7 +152,7 @@ class SwipeablePanel extends Component<
     const dimesions = Dimensions.get('screen');
     FULL_HEIGHT = dimesions.height;
     FULL_WIDTH = dimesions.width;
-    PANEL_HEIGHT = FULL_HEIGHT - TOP_EXTRA_SPACE;
+    PANEL_HEIGHT = FULL_HEIGHT - 100;
 
     this.setState({
       orientation:
@@ -192,20 +193,20 @@ class SwipeablePanel extends Component<
       }
     }
 
-    if (prevState.orientation != this.state.orientation)
+    if (prevState.orientation !== this.state.orientation)
       this._animateTo(this.state.status);
   }
 
   _animateTo = (newStatus = 0) => {
     let newY = 0;
 
-    if (newStatus == STATUS.CLOSED) newY = PANEL_HEIGHT;
-    else if (newStatus == STATUS.SMALL)
+    if (newStatus === STATUS.CLOSED) newY = PANEL_HEIGHT;
+    else if (newStatus === STATUS.SMALL)
       newY =
         this.state.orientation === 'portrait'
           ? FULL_HEIGHT - 400
           : FULL_HEIGHT / 3;
-    else if (newStatus == STATUS.LARGE) newY = 0;
+    else if (newStatus === STATUS.LARGE) newY = 0;
 
     this.setState({
       showComponent: true,
@@ -220,13 +221,13 @@ class SwipeablePanel extends Component<
       restDisplacementThreshold: 10,
       restSpeedThreshold: 10,
     }).start(() => {
-      if (newStatus == 0) {
+      if (newStatus === 0) {
         this.props.onClose();
         this.setState({
           showComponent: false,
         });
       } else
-        this.setState({canScroll: newStatus == STATUS.LARGE ? true : false});
+        this.setState({canScroll: newStatus === STATUS.LARGE ? true : false});
     });
   };
 
@@ -325,7 +326,7 @@ const SwipeablePanelStyles = StyleSheet.create({
     position: 'absolute',
     height: PANEL_HEIGHT,
     width: FULL_WIDTH - 50,
-    transform: [{translateY: FULL_HEIGHT - TOP_EXTRA_SPACE}],
+    transform: [{translateY: FULL_HEIGHT - 100}],
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'white',
@@ -350,7 +351,7 @@ const SwipeablePanelStyles = StyleSheet.create({
   },
 });
 
-export default SwipeablePanel;
-export const SMALL_PANEL_CONTENT_HEIGHT =
-  PANEL_HEIGHT - (FULL_HEIGHT - 400) - 25;
-export const LARGE_PANEL_CONTENT_HEIGHT = PANEL_HEIGHT - 25;
+const SMALL_PANEL_CONTENT_HEIGHT = PANEL_HEIGHT - (FULL_HEIGHT - 400) - 25;
+const LARGE_PANEL_CONTENT_HEIGHT = PANEL_HEIGHT - 25;
+
+export {SwipeablePanel, LARGE_PANEL_CONTENT_HEIGHT, SMALL_PANEL_CONTENT_HEIGHT};

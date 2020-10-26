@@ -1,23 +1,21 @@
-import * as React from 'react';
+import React, { Component } from 'react';
 import {
+  StyleSheet,
+  ScrollView,
+  View,
+  TouchableHighlight,
+  TouchableWithoutFeedback,
   Animated,
   Dimensions,
   PanResponder,
-  ScrollView,
-  StyleSheet,
-  TouchableHighlight,
-  TouchableWithoutFeedback,
-  View
 } from 'react-native';
+
 import { Bar } from './Bar';
 import { Close } from './Close';
 
-let NOTCH_PREVENTION = 14;
-let TOP_EXTRA_SPACE = 100 + NOTCH_PREVENTION;
-
-let FULL_HEIGHT = Dimensions.get('window').height - NOTCH_PREVENTION;
+let FULL_HEIGHT = Dimensions.get('window').height;
 let FULL_WIDTH = Dimensions.get('window').width;
-let PANEL_HEIGHT = FULL_HEIGHT - TOP_EXTRA_SPACE;
+let PANEL_HEIGHT = FULL_HEIGHT - 100;
 
 const STATUS = {
   CLOSED: 0,
@@ -58,7 +56,7 @@ type SwipeablePanelState = {
   panelHeight: number;
 };
 
-class SwipeablePanel extends React.Component<SwipeablePanelProps, SwipeablePanelState> {
+class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState> {
   pan: Animated.ValueXY;
   isClosing: boolean;
   _panResponder: any;
@@ -98,7 +96,7 @@ class SwipeablePanel extends React.Component<SwipeablePanelProps, SwipeablePanel
         )
           this.state.pan.setValue({
             x: 0,
-            y: Math.max(0, gestureState.dy),
+            y: this.state.status === STATUS.LARGE ? Math.max(0, gestureState.dy) : gestureState.dy,
           });
       },
       onPanResponderRelease: (evt, gestureState) => {
@@ -135,7 +133,7 @@ class SwipeablePanel extends React.Component<SwipeablePanelProps, SwipeablePanel
     const dimesions = Dimensions.get('screen');
     FULL_HEIGHT = dimesions.height;
     FULL_WIDTH = dimesions.width;
-    PANEL_HEIGHT = FULL_HEIGHT - TOP_EXTRA_SPACE;
+    PANEL_HEIGHT = FULL_HEIGHT - 100;
 
     this.setState({
       orientation: dimesions.height >= dimesions.width ? 'portrait' : 'landscape',
@@ -149,10 +147,10 @@ class SwipeablePanel extends React.Component<SwipeablePanelProps, SwipeablePanel
 
   componentDidUpdate(prevProps: SwipeablePanelProps, prevState: SwipeablePanelState) {
     const { isActive, openLarge, onlyLarge, onlySmall } = this.props;
-    // if (onlyLarge && onlySmall)
-    //   console.warn(
-    //     'Ops. You are using both onlyLarge and onlySmall options. onlySmall will override the onlyLarge in this situation. Please select one of them or none.',
-    //   );
+    if (onlyLarge && onlySmall)
+      console.warn(
+        'Ops. You are using both onlyLarge and onlySmall options. onlySmall will override the onlyLarge in this situation. Please select one of them or none.',
+      );
 
     if (prevProps.isActive !== isActive) {
       this.setState({ isActive });
@@ -287,7 +285,7 @@ const SwipeablePanelStyles = StyleSheet.create({
     position: 'absolute',
     height: PANEL_HEIGHT,
     width: FULL_WIDTH - 50,
-    transform: [{ translateY: FULL_HEIGHT - TOP_EXTRA_SPACE }],
+    transform: [{ translateY: FULL_HEIGHT - 100 }],
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: 'white',
