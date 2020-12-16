@@ -40,7 +40,7 @@ type SwipeablePanelProps = {
   noBar?: boolean;
   barStyle?: object;
   allowTouchOutside?: boolean;
-  scrollViewProps?:ScrollViewProps
+  scrollViewProps?: ScrollViewProps
 };
 
 type MaybeAnimated<T> = T | Animated.Value;
@@ -252,7 +252,7 @@ class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState>
             <Close rootStyle={closeRootStyle} iconStyle={closeIconStyle} onPress={this.props.onClose} />
           )}
           <ScrollView
-            
+
             onTouchStart={() => {
               return false;
             }}
@@ -267,8 +267,8 @@ class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState>
                 <React.Fragment>{this.props.children}</React.Fragment>
               </TouchableHighlight>
             ) : (
-              this.props.children
-            )}
+                this.props.children
+              )}
           </ScrollView>
         </Animated.View>
       </Animated.View>
