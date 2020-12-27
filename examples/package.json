@@ -21,14 +21,13 @@
     "react-native-typography": "^1.4.1",
     "react-native-vector-icons": "^6.6.0",
     "react-navigation": "^3.11.0",
-    "rn-swipeable-panel": "../rn-swipeable-panel-1.2.3.tgz"
+    "rn-swipeable-panel": "../rn-swipeable-panel-v1.2.5.tgz"
   },
   "devDependencies": {
     "@babel/core": "^7.7.7",
     "@babel/plugin-transform-runtime": "^7.1.0",
     "@babel/runtime": "^7.6.2",
     "@react-native-community/eslint-config": "^0.0.5",
-    "@types/rn-swipeable-panel": "^1.1.0",
     "babel-jest": "^24.9.0",
     "babel-plugin-module-resolver": "^3.1.1",
     "babel-plugin-transform-remove-console": "^6.9.4",

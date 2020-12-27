@@ -4,6 +4,7 @@
 // Definitions: https://github.com/DefinitelyTyped/types/rn-swipeable-panel
 
 import * as React from 'react';
+import { ScrollViewProps } from 'react-native';
 
 declare interface SwipeablePanelProps extends React.Props<SwipeablePanel> {
   /**
@@ -82,6 +83,11 @@ declare interface SwipeablePanelProps extends React.Props<SwipeablePanel> {
    * Required prop to keep panel's state sync with your parent components'state. Will be fired when panel is closed. See the example project.
    */
   onClose: () => void;
+
+  /**
+   * You can pass your scroll view props
+   */
+  scrollViewProps?: ScrollViewProps;
 }
 
 declare var LARGE_PANEL_CONTENT_HEIGHT: number;

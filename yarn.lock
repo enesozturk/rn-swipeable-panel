@@ -9988,6 +9988,11 @@ ripemd160@^2.0.0, ripemd160@^2.0.1:
     hash-base "^3.0.0"
     inherits "^2.0.1"
 
+rn-swipeable-panel@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/rn-swipeable-panel/-/rn-swipeable-panel-1.2.3.tgz#c2aac0b10bfdc00dd92eca3f5e78995761c39a04"
+  integrity sha512-pq2NDXHq0U4iqqhLsPxKdeshjSNgU6snOn/99bF4xhLA8UWZjTCDAhRo723W+YsSQY28/VMdiQv0XOtZgXQOAQ==
+
 rollup-plugin-babel@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/rollup-plugin-babel/-/rollup-plugin-babel-4.4.0.tgz#d15bd259466a9d1accbdb2fe2fff17c52d030acb"
