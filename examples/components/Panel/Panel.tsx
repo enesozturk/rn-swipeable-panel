@@ -8,6 +8,7 @@ import {
   Animated,
   Dimensions,
   PanResponder,
+  ScrollViewProps,
 } from 'react-native';
 
 import {Bar} from './Bar';
@@ -39,6 +40,7 @@ type SwipeablePanelProps = {
   noBar?: boolean;
   barStyle?: object;
   allowTouchOutside?: boolean;
+  scrollViewProps?: ScrollViewProps;
 };
 
 type MaybeAnimated<T> = T | Animated.Value;
@@ -298,7 +300,8 @@ class SwipeablePanel extends Component<
             }}
             contentContainerStyle={
               SwipeablePanelStyles.scrollViewContentContainerStyle
-            }>
+            }
+            {...this.props.scrollViewProps}>
             {this.state.canScroll ? (
               <TouchableHighlight>
                 <React.Fragment>{this.props.children}</React.Fragment>

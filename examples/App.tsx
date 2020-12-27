@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {StyleSheet, StatusBar, Text} from 'react-native';
+import {StyleSheet, StatusBar} from 'react-native';
 import {SafeAreaView} from 'react-navigation';
 
 import {Header} from './components/Header';
@@ -23,18 +23,18 @@ import {SwipeablePanel} from 'rn-swipeable-panel';
 
 export type AppState = {
   content: Function;
-  isActive: Boolean;
-  openLarge: Boolean;
-  onlyLarge: Boolean;
-  fullWidth: Boolean;
-  noBar: Boolean;
+  isActive: boolean;
+  openLarge: boolean;
+  onlyLarge: boolean;
+  fullWidth: boolean;
+  noBar: boolean;
   barStyle: Object;
-  showCloseButton: Boolean;
-  noBackgroundOpacity: Boolean;
-  bounceAnimation: Boolean;
-  closeOnTouchOutside: Boolean;
-  onlySmall: Boolean;
-  allowTouchOutside: Boolean;
+  showCloseButton: boolean;
+  noBackgroundOpacity: boolean;
+  bounceAnimation: boolean;
+  closeOnTouchOutside: boolean;
+  onlySmall: boolean;
+  allowTouchOutside: boolean;
   panelStyles: Object;
 };
 
