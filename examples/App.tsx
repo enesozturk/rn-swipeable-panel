@@ -36,6 +36,7 @@ export type AppState = {
   onlySmall: boolean;
   allowTouchOutside: boolean;
   panelStyles: Object;
+  smallPanelHeight?: number;
 };
 
 export default class App extends Component<{}, AppState> {
@@ -77,6 +78,7 @@ export default class App extends Component<{}, AppState> {
       fullWidth: true,
       showCloseButton: true,
       panelStyles: {},
+      smallPanelHeight: 300,
       content: () => <Settings />,
     });
   };
@@ -146,7 +148,9 @@ export default class App extends Component<{}, AppState> {
         <SwipeablePanel
           {...this.state}
           {...this.state.panelStyles}
-          onClose={() => this.setState({isActive: false})}>
+          onClose={() =>
+            this.setState({isActive: false, smallPanelHeight: undefined})
+          }>
           {this.state.content()}
         </SwipeablePanel>
       </SafeAreaView>
