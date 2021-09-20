@@ -2,6 +2,7 @@ import * as React from 'react';
 import { SafeAreaView } from 'react-native';
 
 import { SwipeablePanel } from 'rn-swipeable-panel';
+
 import { Header } from './src/components/Header';
 import { PanelContent } from './src/components/PanelContent';
 import useSwipeablePanel from './src/hooks/useSwipeablePanel';
@@ -31,7 +32,7 @@ export default function App() {
           openDarkPanel={openDarkPanel}
         />
       </SafeAreaView>
-      <SwipeablePanel {...panelState} {...panelState.panelStyles} onClose={closePanel}>
+      <SwipeablePanel {...panelState} onClose={closePanel}>
         <PanelContent
           contentType={panelState.contentType}
           panelState={panelState}
