@@ -86,6 +86,7 @@ export default App = () => {
 | **closeIconStyle**      | `Object`   | Use this prop to override close button icon style           | `{}`    |
 | **barStyle**            | `Object`   | Use this prop to override bar style                         | `{}`    |
 | **smallPanelHeight**    | `Object`   | Use this prop to override the small panel default height    |         |
+| **barContainerStyle**   | `Object`   | Use this prop to override bar container style               | `{}`    |
 | **closeOnTouchOutside** | `bool`     | Set true if you want to close panel by touching outside     | `false` |
 | **allowTouchOutside**   | `bool`     | Set true if you want to make toucable outside of panel      | `false` |
 | **noBar**               | `bool`     | Set true if you want to remove gray bar                     | `false` |

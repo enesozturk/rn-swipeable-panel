@@ -3,11 +3,12 @@ import { StyleSheet, View } from 'react-native';
 
 type BarProps = {
   barStyle?: object;
+  barContainerStyle?: object;
 };
 
-export const Bar = ({ barStyle }: BarProps) => {
+export const Bar = ({ barStyle, barContainerStyle }: BarProps) => {
   return (
-    <View style={BarStyles.barContainer}>
+    <View style={[BarStyles.barContainer, barContainerStyle]}>
       <View style={[BarStyles.bar, barStyle]} />
     </View>
   );
