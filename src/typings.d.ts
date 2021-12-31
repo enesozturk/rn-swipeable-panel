@@ -76,6 +76,10 @@ declare interface SwipeablePanelProps extends React.Props<SwipeablePanel> {
    * Use this prop to override the small panel default height
    */
   smallPanelHeight?: number;
+  /**
+   * Use this prop to override bar container style
+   */
+  barContainerStyle?: object;
 
   /**
    * Set true if you want to make toucable outside of panel

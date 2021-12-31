@@ -40,6 +40,7 @@ type SwipeablePanelProps = {
   smallPanelHeight?: number;
   noBar?: boolean;
   barStyle?: object;
+  barContainerStyle?: object,
   allowTouchOutside?: boolean;
   scrollViewProps?: ScrollViewProps;
 };
@@ -205,6 +206,7 @@ class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState>
       noBackgroundOpacity,
       style,
       barStyle,
+      barContainerStyle,
       closeRootStyle,
       closeIconStyle,
       onClose,
@@ -249,7 +251,7 @@ class SwipeablePanel extends Component<SwipeablePanelProps, SwipeablePanelState>
           ]}
           {...this._panResponder.panHandlers}
         >
-          {!this.props.noBar && <Bar barStyle={barStyle} />}
+          {!this.props.noBar && <Bar barStyle={barStyle} barContainerStyle={barContainerStyle} />}
           {this.props.showCloseButton && (
             <Close rootStyle={closeRootStyle} iconStyle={closeIconStyle} onPress={this.props.onClose} />
           )}

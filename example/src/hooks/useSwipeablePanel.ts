@@ -18,6 +18,7 @@ const useSwipeablePanel = () => {
     onlySmall: false,
     allowTouchOutside: false,
     barStyle: {},
+    barContainerStyle: {},
     style: {},
     closeRootStyle: {},
     contentType: null,
@@ -77,6 +78,7 @@ const useSwipeablePanel = () => {
       noBar: false,
       style: { backgroundColor: '#1f1f1f' },
       barStyle: { backgroundColor: 'rgba(255,255,255,0.2)' },
+      barContainerStyle: { backgroundColor: '#1f1f1f' },
       closeRootStyle: { backgroundColor: 'rgba(255,255,255,0.2)' },
       contentType: 'darkShoppingCart',
     });
