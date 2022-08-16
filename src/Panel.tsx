@@ -25,6 +25,7 @@ const STATUS = {
 };
 
 type SwipeablePanelProps = {
+  children?: React.ReactNode;  
   isActive: boolean;
   onClose: () => void;
   showCloseButton?: boolean;
